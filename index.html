@@ -1,0 +1,2067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Seville 2025 ✨</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --bg: #000000;
+            --surface: #0a0a0a;
+            --card: rgba(18, 18, 18, 0.95);
+            --accent: #ff6b35;
+            --accent-dim: #cc5528;
+            --text: #ffffff;
+            --text-dim: #999999;
+            --text-muted: #666666;
+            --border: rgba(255, 255, 255, 0.08);
+            --success: #4ade80;
+            --warning: #fbbf24;
+            --safe-top: env(safe-area-inset-top);
+            --safe-bottom: env(safe-area-inset-bottom);
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            padding-top: var(--safe-top);
+            padding-bottom: calc(100px + var(--safe-bottom));
+        }
+
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: fadeOut 0.5s ease-out 1s forwards;
+        }
+
+        @keyframes fadeOut {
+            to { opacity: 0; pointer-events: none; }
+        }
+
+        .loading-screen h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, var(--accent), var(--text), var(--accent));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 2s linear infinite;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 100;
+            padding: calc(16px + var(--safe-top)) 20px 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .seville-time {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            font-size: 0.875rem;
+        }
+
+        .seville-time .time {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .seville-time .label {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+
+        .tabs {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border);
+            padding: 12px 16px calc(12px + var(--safe-bottom));
+            z-index: 100;
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab {
+            flex: 1;
+            min-width: 60px;
+            padding: 10px 8px;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-dim);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .tab.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .tab:active {
+            transform: scale(0.95);
+        }
+
+        .tab-label {
+            font-size: 0.7rem;
+            opacity: 0.8;
+        }
+
+        .tab-main {
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .content {
+            padding: calc(80px + var(--safe-top)) 20px calc(80px + var(--safe-bottom));
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .quick-stat {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border);
+            animation: slideUp 0.5s ease-out backwards;
+        }
+
+        .quick-stat h3 {
+            color: var(--accent);
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .essential-card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border);
+            animation: slideUp 0.6s ease-out backwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .essential-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent);
+        }
+
+        .essential-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .essential-card .icon {
+            font-size: 1.25rem;
+        }
+
+        .essential-content {
+            color: var(--text-dim);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .tip {
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 12px;
+            padding: 12px;
+            margin-top: 12px;
+            font-size: 0.875rem;
+            color: var(--accent);
+        }
+
+        .day-header {
+            margin-bottom: 24px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .day-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--text) 0%, var(--text-dim) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .day-subtitle {
+            color: var(--text-dim);
+            font-size: 1rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 32px;
+        }
+        
+        .nested-timeline {
+            position: relative;
+            padding-left: 24px;
+            margin-top: 16px;
+        }
+        
+        .nested-timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: var(--border);
+            opacity: 0.5;
+        }
+        
+        .nested-timeline-item {
+            position: relative;
+            margin-bottom: 16px;
+        }
+        
+        .nested-timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .nested-timeline-dot {
+            position: absolute;
+            left: -20px;
+            top: 12px;
+            width: 8px;
+            height: 8px;
+            background: var(--card);
+            border: 2px solid var(--text-muted);
+            border-radius: 50%;
+        }
+        
+        .nested-timeline-item .activity-card {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--accent), transparent);
+            opacity: 0.3;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 24px;
+            animation: slideUp 0.6s ease-out backwards;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(5) { animation-delay: 0.5s; }
+
+        .timeline-dot {
+            position: absolute;
+            left: -26px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            background: var(--card);
+            border: 2px solid var(--text-muted);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item.highlight .timeline-dot {
+            width: 16px;
+            height: 16px;
+            left: -28px;
+            top: 6px;
+            background: var(--accent);
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        .activity-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .activity-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent, rgba(255, 107, 53, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .activity-card:active {
+            transform: scale(0.98);
+        }
+
+        .activity-card.expanded {
+            background: rgba(18, 18, 18, 1);
+            border-color: var(--accent);
+        }
+
+        .activity-card.expanded::after {
+            opacity: 1;
+        }
+
+        .activity-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .activity-main {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .activity-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 0.875rem;
+            color: var(--text-dim);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .price-badge {
+            background: rgba(255, 107, 53, 0.2);
+            color: var(--accent);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .expand-icon {
+            color: var(--text-muted);
+            transition: transform 0.3s ease;
+            font-size: 1.25rem;
+        }
+
+        .activity-card.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .activity-details {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: max-height 0.2s ease-out, 
+                        opacity 0.15s ease-out,
+                        transform 0.15s ease-out;
+        }
+
+        .activity-card.expanded .activity-details {
+            max-height: 2000px;
+            opacity: 1;
+            transform: translateY(0);
+            margin-top: 16px;
+            transition: max-height 0.35s ease-out, 
+                        opacity 0.25s ease-out,
+                        transform 0.25s ease-out;
+        }
+        
+        .activity-card.collapsing .activity-details {
+            transition: max-height 0.15s ease-out, 
+                        opacity 0.1s ease-out,
+                        transform 0.1s ease-out;
+        }
+
+        .activity-description {
+            color: var(--text-dim);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .action-buttons {
+            display: none;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .activity-card.expanded .action-buttons {
+            display: flex;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .action-buttons a,
+        .action-buttons button {
+            pointer-events: auto;
+            cursor: pointer;
+            z-index: 10;
+            position: relative;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+        
+        a.btn {
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:active {
+            background: var(--accent-dim);
+            transform: scale(0.98);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:active {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(0.98);
+        }
+
+
+        .floating-badge {
+            position: fixed;
+            top: calc(100px + var(--safe-top));
+            right: 20px;
+            background: var(--success);
+            color: var(--bg);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            box-shadow: 0 4px 20px rgba(74, 222, 128, 0.3);
+            z-index: 90;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        .search-box {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .search-input {
+            flex: 1;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+
+        @media (min-width: 768px) {
+            .content {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+        }
+
+        .swipe-hint {
+            position: fixed;
+            bottom: calc(100px + var(--safe-bottom));
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 107, 53, 0.9);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            animation: slideUp 0.5s ease-out, fadeOut 3s ease-out 2s forwards;
+            z-index: 200;
+        }
+
+        .restaurant-grid {
+            display: grid;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .restaurant-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .restaurant-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .restaurant-details {
+            font-size: 0.875rem;
+            color: var(--text-dim);
+        }
+
+        .booking-reminder {
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            border-radius: 12px;
+            padding: 16px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .booking-reminder h4 {
+            color: var(--warning);
+            margin-bottom: 8px;
+        }
+
+        .booking-reminder p {
+            color: var(--text-dim);
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-screen">
+        <h1>Sevilla</h1>
+    </div>
+
+    <header class="header">
+        <div class="header-content">
+            <h1>Seville 2025</h1>
+            <div class="seville-time">
+                <span class="time" id="seville-time">--:--</span>
+                <span class="label">Seville Time</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="tabs" id="tabs-container">
+        <!-- Tabs will be generated dynamically -->
+    </div>
+
+    <div class="content" id="content-container">
+        <!-- Content will be generated dynamically -->
+    </div>
+
+    <!-- <div class="swipe-hint">Swipe or tap days to navigate</div> -->
+
+    <script>
+        // DATA STRUCTURES
+        const travelData = {
+            stats: {
+                days: "5",
+                budget: "€350",
+                location: "Casco Antiguo",
+                temperature: "22°C"
+            },
+            
+            tabs: [
+                // { id: 'essentials', label: 'ROME', main: 'Tips' },
+                { id: 'day0', label: 'FRI', main: '3' },
+                { id: 'day1', label: 'SAT', main: '4' },
+                { id: 'day2', label: 'SUN', main: '5' },
+                { id: 'day3', label: 'MON', main: '6' },
+                { id: 'day4', label: 'TUE', main: '7' },
+                { id: 'secrets', label: '🗝️', main: 'Secrets' }
+                // { id: 'food', label: 'ALL', main: 'Food' },
+                // { id: 'bookings', label: 'BOOK', main: 'Now' }
+            ],
+
+            essentials: [
+                {
+                    icon: "🏨",
+                    title: "Your Accommodation",
+                    content: "<strong>Magno Apartments Almansa</strong><br>C. Almansa, 7, Casco Antiguo, 41001 Sevilla<br>Perfect location in the historic center - everything is walkable from here!",
+                    button: {
+                        text: "View on Booking.com",
+                        onclick: "window.open('https://www.booking.com/hotel/es/magno-apartments-almansa.en-gb.html', '_blank')",
+                        class: "btn-primary",
+                        style: "margin-top: 12px; width: 100%;"
+                    }
+                },
+                {
+                    icon: "📍",
+                    title: "From C. Almansa You Can Walk To",
+                    content: "<strong>Cathedral:</strong> 3-4 minutes<br><strong>Las Setas:</strong> 8 minutes<br><strong>Triana Bridge:</strong> 15 minutes<br><strong>Plaza de España:</strong> 20 minutes<br><strong>Santa Cruz District:</strong> 5 minutes",
+                    tip: "💡 Everything in the old town is walkable - save taxi money!"
+                },
+                {
+                    icon: "🍽️",
+                    title: "Spanish Dining Times",
+                    content: "<strong>Lunch:</strong> 2:00-4:00 PM<br><strong>Siesta:</strong> Most shops close 3:00-5:00 PM<br><strong>Tapas:</strong> 8:00-10:00 PM<br><strong>Dinner:</strong> 9:30-11:30 PM<br><strong>Bars:</strong> Open until 2-3 AM",
+                    tip: "💡 Your early dinner needs require tourist-friendly spots with continuous service"
+                },
+                {
+                    icon: "🗣️",
+                    title: "Essential Spanish Phrases",
+                    content: "<strong>Dame una:</strong> 'Give me one' (at Las Golondrinas)<br><strong>Ponme una caña:</strong> Order a small beer<br><strong>La cuenta, por favor:</strong> The bill please<br><strong>Está buenísimo:</strong> It's delicious<br><strong>¿Cuánto es?:</strong> How much?",
+                    tip: "💡 Locals appreciate any effort to speak Spanish"
+                },
+                {
+                    icon: "💶",
+                    title: "Cash & Tipping",
+                    content: "Budget €40-50 cash daily. Many tapas bars are cash only. Tipping: Round up for tapas, 5-10% for sit-down meals. Not expected but appreciated.",
+                    tip: "💡 La Caixa and Santander ATMs have English options"
+                },
+                {
+                    icon: "🚕",
+                    title: "Transport & Emergency",
+                    content: "<strong>Taxi app:</strong> PideTaxi<br><strong>Airport taxi:</strong> Fixed €22.20-30.20<br><strong>Emergency:</strong> 112<br><strong>Tourist Police:</strong> 902 102 112<br><strong>City bikes:</strong> Sevici (first 30min free)",
+                    tip: "💡 Download offline maps before arrival"
+                },
+                {
+                    icon: "🌡️",
+                    title: "October Weather",
+                    content: "Perfect 18-25°C days, 15-18°C evenings. Light jacket for nights. Rare rain but pack small umbrella. Ideal for rooftop bars and outdoor dining!",
+                    tip: "💡 Best weather of the year - enjoy those terraces!"
+                }
+            ],
+
+            days: {
+                day0: {
+                    title: "La Noche en Blanco",
+                    subtitle: "Friday, October 3 • Cultural Festival Night",
+                    reminder: {
+                        title: "🎨 Festival: 6:00 PM - 2:00 AM",
+                        text: "Bengals dinner booked 8:30 PM • Cathedral FREE entry 8 PM-midnight"
+                    },
+                    activities: [
+                        {
+                            title: "✈️ Arrival & Check-in",
+                            meta: [
+                                { icon: "⏰", text: "By 6:30 PM" },
+                                { icon: "📍", text: "C. Almansa, 7" },
+                                { text: "Casco Antiguo" }
+                            ],
+                            description: "Check into your apartment in the heart of Seville's historic center. You're perfectly positioned - just 3-4 minutes from the Cathedral and in walking distance to everything. Drop your bags and get ready for La Noche en Blanco!",
+                            tip: "💡 Grab cash from La Caixa ATM if needed - many festival vendors are cash only"
+                        },
+                        {
+                            highlight: true,
+                            title: "🎨 La Noche en Blanco Festival",
+                            meta: [
+                                { icon: "⏰", text: "6:00 PM - 2:00 AM" },
+                                { icon: "📍", text: "Citywide" },
+                                { text: "FREE", class: "price-badge" }
+                            ],
+                            description: "Seville's 12th White Night Festival! 100+ FREE cultural activities across the city. Museums open late, flamenco in plazas, art installations, Roman tours. Full program at nocheenblanco.org (releases mid-September). Start early - most events are first-come-first-served.",
+                            tip: "💡 Focus on nearby Santa Cruz district events before dinner - save energy for the night ahead!",
+                            buttons: [
+                                { text: "Festival Website", url: "https://nocheenblanco.org", class: "btn-primary" }
+                            ]
+                        },
+                        {
+                            highlight: true,
+                            title: "🍽️ Dinner at Bendala ✅",
+                            meta: [
+                                { icon: "⏰", text: "8:30 PM" },
+                                { icon: "📍", text: "Arroces y Brasas" },
+                                { text: "BOOKED", class: "price-badge" }
+                            ],
+                            description: "CONFIRMED for 8:30 PM! Bendala - Arroces y Brasas - expect excellent paella and grilled meats. This gives you time to explore festival events before dinner, and you'll finish in perfect time for the Cathedral's special opening.",
+                            tip: "💡 Try their arroz negro (black rice with squid ink) if available!"
+                            // <to research> best dishes at Bendala
+                        },
+                        {
+                            highlight: true,
+                            title: "⛪ Cathedral Night Visit",
+                            meta: [
+                                { icon: "⏰", text: "8:00 PM - Midnight" },
+                                { icon: "📍", text: "3-4 min walk" },
+                                { text: "FREE Tonight!", class: "price-badge" }
+                            ],
+                            description: "Special La Noche en Blanco opening! World's largest Gothic cathedral illuminated at night. Enter via Puerta del Príncipe. See Columbus's tomb, climb Giralda Tower, explore the Treasury. Magical atmosphere without daytime crowds. Last entry 11:00 PM.",
+                            tip: "💡 Go after dinner (10:30 PM) for smaller crowds - most tourists go early",
+                            buttons: [
+                                { text: "Directions", url: "https://www.google.com/maps/dir/C.+Almansa,+7/Catedral+de+Sevilla", class: "btn-primary" }
+                            ]
+                        },
+                        {
+                            title: "🍸 Late Night Cocktails",
+                            meta: [
+                                { icon: "⏰", text: "11:30 PM+" },
+                                { icon: "📍", text: "Near apartment" },
+                                { text: "€10-14", class: "price-badge" }
+                            ],
+                            description: "<strong>🏆 Naked and Famous</strong> (European Mixology Champions 2023-2024)<br>C/ Argote de Molina, 21 (5-min walk). Multi-sensory experience with color-blocked rooms. Must try: 'The Love of My Life' (tequila, passion fruit, chili), 'Pumpkin Up' (Dewar's 12, St Germain, pumpkin whiskey). €10-12 cocktails. Open till 2 AM (3 AM Saturdays).<br><br><strong>The Second Room</strong><br>C/ de Placentines, 19 (2-min walk). Intimate terrace overlooking Cathedral, expert espresso martinis, premium Spanish gins. Happy Hour: 5-6 PM & 9-10 PM (mojitos & caipirinhas). €10 cocktails. Till 2 AM (3 AM weekends).<br><br><strong>La Terraza EME</strong><br>Hotel EME Catedral, C/ Alemanes, 27 (3-min walk). Closest rooftop to Cathedral with multi-level terraces, illuminated Gothic flying buttresses views. €14+ cocktails. Till midnight (may extend for events).",
+                            tip: "💡 Naked and Famous gets busy after midnight - worth the wait for award-winning cocktails!",
+                            buttons: [
+                                { text: "Naked and Famous", url: "https://nakedandfamous.es", class: "btn-primary" },
+                                { text: "Bar Locations Map", url: "https://www.google.com/maps/search/cocktail+bars+near+Catedral+de+Sevilla", class: "btn-secondary" }
+                            ]
+                        }
+                    ]
+                },
+                day1: {
+                    title: "Historic Tours & Triana",
+                    subtitle: "Saturday, October 4 • Tapas trail night",
+                    reminder: {
+                        title: "🍽️ Triana Tapas Route",
+                        text: "Start 7:30 PM • Say 'Dame una' at Las Golondrinas!"
+                    },
+                    activities: [
+                        {
+                            title: "☕ Morning Coffee",
+                            meta: [
+                                { icon: "⏰", text: "9:00 AM" },
+                                { icon: "📍", text: "Near apartment" },
+                                { text: "€2-4", class: "price-badge" }
+                            ],
+                            description: "Start your day like a local. Great options near you:<br><br><strong>Utopia Cafe</strong> - Trendy specialty coffee spot with excellent brunch options<br><strong>Syra Coffee</strong> - Multiple locations on C/ Rioja and C/ Tetuán, third-wave coffee specialists<br><strong>Confitería La Campana</strong> - Historic pastry shop, famous for breakfast treats<br><br>Or just hit any corner bar for a quick café con leche - stand at the bar for local prices!",
+                            tip: "💡 Order 'café con leche y tostada con tomate' - classic Andalusian breakfast"
+                        },
+                        {
+                            title: "🚶 Morning Walking Tour Options",
+                            meta: [
+                                { icon: "⏰", text: "10:00-11:00 AM start" },
+                                { icon: "⏱️", text: "2 hours" },
+                                { text: "€15-25", class: "price-badge" }
+                            ],
+                            description: "<strong>Living Tours - María Luisa Park & Plaza de España</strong><br>Meet: Glorieta San Diego (15-20 min walk). €20-25pp. Covers your requested sites: Alcázar area, María Luisa Park, Plaza de España. Local guides provide insider food tips.<br><br><strong>GetYourGuide Small-Group City Highlights</strong><br>Meet: Plaza de San Francisco fountain (8-10 min walk). €15-20pp. Max 15 people, covers Moorish and Christian architecture, includes Star Wars filming locations.",
+                            tip: "💡 Book ahead or just show up - both usually have space on Saturdays",
+                            buttons: [
+                                { text: "Living Tours", url: "https://livingtours.com/en/tour/walking-tour-maria-luisa-park", class: "btn-primary" },
+                                { text: "GetYourGuide", url: "https://www.getyourguide.com/seville-l48/seville-small-group-city-highlights-walking-tour-t491716", class: "btn-secondary" }
+                            ]
+                        },
+                        {
+                            title: "🛍️ Triana Food Market",
+                            meta: [
+                                { icon: "⏰", text: "12:30-1:30 PM" },
+                                { icon: "📍", text: "Triana district" },
+                                { text: "€5-15", class: "price-badge" }
+                            ],
+                            description: "Historic market building with fresh produce, seafood, and tapas stalls. Try the jamón ibérico samples, fresh oysters, or grab a beer and montadito (small sandwich). Great for picnic supplies or a light lunch. Market atmosphere on Saturday mornings is buzzing.",
+                            tip: "💡 The stalls around the edges serve tapas and drinks - perfect for a quick bite",
+                            buttons: [
+                                { text: "Market Location", url: "https://www.google.com/maps/place/Mercado+de+Triana", class: "btn-primary" }
+                            ]
+                        },
+                        {
+                            title: "☀️ Afternoon Siesta",
+                            meta: [
+                                { icon: "⏰", text: "2:00-7:00 PM" },
+                                { icon: "📍", text: "Your apartment" },
+                                { text: "Relax!" }
+                            ],
+                            description: "Return to your apartment for afternoon chill time in the sun. Most shops closed during siesta anyway. Rest up for tonight's tapas adventure - you'll need the energy! Maybe plan tomorrow's activities or catch up on photos.",
+                            tip: "💡 Set alarm for 6:30 PM - don't miss Triana tapas time!"
+                        },
+                        {
+                            highlight: true,
+                            title: "🍽️ Triana Tapas Trail",
+                            meta: [
+                                { icon: "⏰", text: "7:30-10:30 PM" },
+                                { icon: "📍", text: "15-20 min walk" },
+                                { text: "€40-60 total", class: "price-badge" }
+                            ],
+                            description: "Self-guided tapas route through authentic Triana. Cross Isabel II Bridge for stunning sunset views. Route minimizes walking between stops:<br><br><strong>1️⃣ Bar Santa Ana</strong> - C/ Pureza, 82 (€3-6)<br>Century-old family bar with Semana Santa imagery. Must order: Vermouth on tap (€3-4) and three-cheese blend (€5-6).<br><br><strong>2️⃣ Bar Típico</strong> - Find location (€4-8)<br>Local favorite for traditional tapas. Let the bartender choose!<br><br><strong>3️⃣ Las Golondrinas ⭐</strong> - C/ Antillano Campos, 26 (€6-8)<br>UNMISSABLE! Just say 'Dame una' - locals will respect you know the drill. THE Triana experience!<br><br><strong>4️⃣ Abacería El Mercader</strong> - Find best dishes (€5-10)<br>Modern tapas with traditional roots. Great wine selection.<br><br><strong>5️⃣ Casa Cuco Triana</strong> - Traditional spot (€4-8)<br>Classic neighborhood bar. Try whatever locals are eating.<br><br><strong>6️⃣ Dulcería Manu Jara</strong> - Dessert stop (€3-5)<br>End with traditional sweets! Famous for pestaños and torrijas.",
+                            tip: "💡 Pace yourself - 1 tapa + 1 drink per bar is the way! Take pastries to go from Manu Jara for tomorrow's breakfast",
+                            buttons: [
+                                { text: "Start at Bar Santa Ana", url: "https://www.google.com/maps/place/Bar+Santa+Ana+Pureza+82+Triana", class: "btn-primary" },
+                                { text: "Las Golondrinas", url: "https://www.google.com/maps/place/Las+Golondrinas+Antillano+Campos+26", class: "btn-secondary" }
+                            ]
+                        }
+                    ]
+                },
+                day2: {
+                    title: "Food Tour & Flamenco",
+                    subtitle: "Sunday, October 5 • Tastes of Seville",
+                    reminder: {
+                        title: "🍽️ Book Devour Tour NOW",
+                        text: "11 AM tour • Limited Sunday spots • Flamenco 9 PM+"
+                    },
+                    activities: [
+                        {
+                            title: "☕ Morning Coffee",
+                            meta: [
+                                { icon: "⏰", text: "Before tour" },
+                                { icon: "📍", text: "Near Las Setas" },
+                                { text: "€2-4", class: "price-badge" }
+                            ],
+                            description: "Quick coffee before your food tour. Great options near Las Setas:<br><br><strong>Delatribua</strong> - Specialty coffee roaster with minimalist vibe, excellent single-origin coffees<br><strong>Virgin Coffee</strong> - Popular local chain, reliable quality and pastries<br><strong>La Caña de España</strong> - Traditional option right at the plaza for classic Spanish breakfast<br><br>The meeting point has plenty of options - just don't fill up before the tour!",
+                            tip: "💡 Don't eat too much - save room for the food tour!"
+                        },
+                        {
+                            highlight: true,
+                            title: "🍽️ Devour Food Tour",
+                            meta: [
+                                { icon: "⏰", text: "10:30 AM - 1:30 PM" },
+                                { icon: "📍", text: "Meet: Las Setas" },
+                                { text: "€96 per person", class: "price-badge" }
+                            ],
+                            description: "<strong>🏆 Tastes, Tapas & Traditions Tour</strong><br>BOOK IMMEDIATELY - Limited Sunday spots! Meet at Plaza de la Encarnación (8-min walk from apartment). #1 on TripAdvisor with good reason. Includes: 8+ tastings, 4 drinks, 7 stops, jamón carving demo. You'll visit century-old pastry shops, family businesses, and get sherry/wine education. Small groups, passionate local guides.",
+                            tip: "💡 Come hungry! This replaces lunch completely",
+                            buttons: [
+                                { text: "Book Now", url: "https://devourtours.com/tours/seville-tapas-tour/", class: "btn-primary" },
+                                { text: "Meeting Point", url: "https://www.google.com/maps/place/Plaza+de+la+Encarnación", class: "btn-secondary" }
+                            ]
+                        },
+                        {
+                            title: "☀️ Afternoon Siesta",
+                            meta: [
+                                { icon: "⏰", text: "2:00-7:00 PM" },
+                                { icon: "📍", text: "Your apartment" },
+                                { text: "Rest & digest!" }
+                            ],
+                            description: "After that food tour, you'll need a break! Return to apartment for afternoon chill time. Perfect for reviewing photos, planning Monday's day trip, or just enjoying the Spanish siesta tradition. Most shops closed anyway.",
+                            tip: "💡 Book tonight's flamenco show if you haven't already"
+                        },
+                        {
+                            title: "🍇 Light Evening Tapas / Dinner In",
+                            meta: [
+                                { icon: "⏰", text: "8:00-9:00 PM" },
+                                { icon: "📍", text: "Near flamenco venue" },
+                                { text: "€10-15", class: "price-badge" }
+                            ],
+                            description: "After the big food tour lunch, keep dinner light. <strong>Option 1:</strong> Grab a tapa or two near your chosen flamenco venue. All three venues have good tapas bars nearby. Perfect for a glass of wine and small bite before the show.<br><br><strong>Option 2 - Dinner In:</strong> Pick up some quality local produce and cook at your apartment! Visit Mercado de la Encarnación (inside Las Setas) or any local supermercado for fresh ingredients. Grab some jamón, manchego cheese, good bread, tomatoes for pan con tomate, and a nice bottle of Rioja. Enjoy on your terrace!",
+                            tip: "💡 Cooking in? El Corte Inglés food hall has premium ingredients till 9 PM"
+                        },
+                        {
+                            highlight: true,
+                            title: "💃 Flamenco Shows",
+                            meta: [
+                                { icon: "⏰", text: "9:00 PM shows" },
+                                { icon: "📍", text: "Santa Cruz" },
+                                { text: "€15-25 or FREE", class: "price-badge" }
+                            ],
+                            description: "<strong>Casa de la Guitarra ⭐ TOP CHOICE</strong><br>C/ Mesón del Moro 12 (3-min walk). Shows: 7:30pm & 9:00pm (1 hour). €15-20pp. 18th-century house, 30-person max, award-winning guitarist José Luis Postigo, authentic guitar museum. Book: flamencoensevilla.com<br><br><strong>Casa de la Memoria</strong><br>C/ Ximénez de Enciso 28 (5-min walk). Shows: 7:30pm & 9:00pm (1 hour). €18-25pp. 15th-century palace courtyard, no amplification, national award winners. Book: casadelamemoria.es<br><br><strong>La Carbonería (FREE)</strong><br>C/ Céspedes, 21 (4-min walk). Shows: 8:30, 9:30, 10:30pm (30 min each). FREE entry, drinks €5-8 cash only. Former coal factory, local atmosphere. Arrive by 8:00pm for 9:00pm show seats.",
+                            tip: "💡 For 9pm+ preference: Book Casa de la Guitarra 9pm show for intimate experience",
+                            buttons: [
+                                { text: "Casa de la Guitarra", url: "https://flamencoensevilla.com", class: "btn-primary" },
+                                { text: "Casa de la Memoria", url: "https://casadelamemoria.es", class: "btn-secondary" }
+                            ]
+                        },
+                        {
+                            title: "🌙 Nightcap Options",
+                            meta: [
+                                { icon: "⏰", text: "10:30 PM+" },
+                                { icon: "📍", text: "Near apartment" },
+                                { text: "€8-12", class: "price-badge" }
+                            ],
+                            description: "End your Sunday with a drink near home. The Second Room (if not visited Friday) has great late-night atmosphere. Or try Dos de Mayo on Plaza de la Gavidia for local vibes. Many small bars around Santa Cruz stay open late on Sundays.",
+                            tip: "💡 Ask at flamenco venue for their favorite local bar - they always know!"
+                        }
+                    ]
+                },
+                day3: {
+                    title: "Day Trips & Rooftops",
+                    subtitle: "Monday, October 6 • Explore beyond Seville",
+                    reminder: {
+                        title: "🍽️ Gusto Dinner 8:30 PM",
+                        text: "Note: Many Jerez bodegas closed Mondays"
+                    },
+                    activities: [
+                        {
+                            title: "🏛️ Half-Day Trip Options",
+                            meta: [
+                                { icon: "⏰", text: "Morning - Return by 5 PM" },
+                                { icon: "📍", text: "Various locations" },
+                                { text: "€1.50-45", class: "price-badge" }
+                            ],
+                            description: "<strong>⚠️ Note: Many Jerez bodegas closed Mondays</strong><br><br><strong>Itálica Roman Ruins ⭐ BEST FOR MONDAY</strong><br>15 min from Seville. €1.50 EU citizens. Birthplace of Emperors Trajan & Hadrian, Game of Thrones location. Tours: Naturanda €35pp incl. transport (naturanda.com), Welcome to Seville €45pp (welcometoseville.com). Or bus M-270 from Plaza de Armas (€2.21).<br><br><strong>Carmona White Village</strong><br>40 min east. Welcome to Seville tour €42pp includes transport/guide/necropolis. 5,000 years history, authentic white village, local wines.<br><br><strong>Olive Oil Mill Tour</strong><br>Naturanda Oil Tourism €35pp, Mon-Fri available, 9am-1pm. Includes transport, mill tour, tastings, farm visit.",
+                            // <!-- <to research> more half-day trip options -->
+                            tip: "💡 Itálica is perfect for Monday - most sites open, closest option, very impressive",
+                            buttons: [
+                                { text: "Itálica Tours", url: "https://naturanda.com", class: "btn-primary" },
+                                { text: "Bus to Itálica", url: "https://www.google.com/maps/dir/Plaza+de+Armas+Seville/Italica", class: "btn-secondary" }
+                            ]
+                        },
+                        {
+                            title: "🛍️ Afternoon Shopping",
+                            meta: [
+                                { icon: "⏰", text: "2:00-6:00 PM" },
+                                { icon: "📍", text: "City center" },
+                                { text: "Varies" }
+                            ],
+                            description: "<strong>Fashion Route:</strong><br>1. Calle Sierpes (5-min) - Zara flagship, Mango, Spanish brands<br>2. El Corte Inglés Plaza Magdalena (5-min) - Department store with gourmet food hall<br>3. Calle Tetuán (3-min) - Parallel shopping street<br><br><strong>Artisan Crafts:</strong><br>Triana Ceramics District (15-min): Cerámica Santa Ana, Centro Cerámica Triana<br>El Postigo near Cathedral - Indoor craft market<br><br><strong>Gourmet Foods:</strong><br>Mercado de Triana - Fresh produce, jamón<br>Zaguán 24 (C/ Ximénez de Enciso, 24) - Premium oils, wines<br>El Corte Inglés Gourmet - Spanish products",
+                            // <!-- <to research> more artisanal shopping options -->
+                            tip: "💡 Most shops reopen at 5 PM after siesta - perfect timing after your day trip"
+                        },
+                        {
+                            highlight: true,
+                            title: "🍽️ Dinner at Gusto ✅",
+                            meta: [
+                                { icon: "⏰", text: "8:30 PM" },
+                                { icon: "📍", text: "Booked" },
+                                { text: "€25-40", class: "price-badge" }
+                            ],
+                            description: "CONFIRMED for 8:30 PM! Your Monday dinner sorted. Great location for rooftop bars afterward.",
+                            tip: "💡 Ask your waiter for their favorite local rooftop - they always know the best spots"
+                        },
+                        {
+                            highlight: true,
+                            title: "🌃 Rooftop Bars",
+                            meta: [
+                                { icon: "⏰", text: "10:00 PM+" },
+                                { icon: "📍", text: "Near apartment" },
+                                { text: "€11-17", class: "price-badge" }
+                            ],
+                            description: "<strong>La Terraza del EME ⭐ BEST MONDAY CHOICE</strong><br>Hotel EME, C/ Alemanes, 27 (3-min walk). Direct cathedral views, 360° panorama. €15-17 cocktails. Open till 1am daily. No reservations needed.<br><br><strong>Pura Vida Terraza</strong><br>Hotel Los Seises, C/ Seises, 6 (4-min walk). Bohemian atmosphere, pool area, occasional live music. €11-14 cocktails (more affordable).",
+                            tip: "💡 Monday nights are quieter - enjoy the views without weekend crowds!",
+                            buttons: [
+                                { text: "EME Terraza Location", url: "https://www.google.com/maps/place/La+Terraza+de+EME+Catedral+Hotel", class: "btn-primary" }
+                            ]
+                        }
+                    ]
+                },
+                day4: {
+                    title: "Departure Day",
+                    subtitle: "Tuesday, October 7 • Hasta luego Sevilla",
+                    reminder: {
+                        title: "✈️ Flight at 7:00 PM - Leave by 5:00 PM",
+                        text: "Check out 11 AM • Store luggage • Lunch 1 PM"
+                    },
+                    activities: [
+                        {
+                            title: "☕ Morning Coffee",
+                            meta: [
+                                { icon: "⏰", text: "9:00 AM" },
+                                { icon: "📍", text: "Final coffee stop" },
+                                { text: "€2-5", class: "price-badge" }
+                            ],
+                            description: "Last Spanish coffee! Try something special:<br><br><strong>Jester Coffee & Juice</strong> - Trendy spot with excellent fresh juices and specialty coffee<br><strong>Torch Coffee Roasters</strong> - If you haven't tried them yet, top-rated specialty coffee<br><strong>Federal Café</strong> - Australian-style brunch spot with great flat whites<br><br>Or revisit your favorite from the weekend!",
+                            tip: "💡 Get your coffee to-go and enjoy a final stroll through the neighborhood"
+                        },
+                        {
+                            title: "🎒 Check Out & Store Luggage",
+                            meta: [
+                                { icon: "⏰", text: "11:00 AM" },
+                                { icon: "📍", text: "After checkout" },
+                                { text: "From €1.49/hour", class: "price-badge" }
+                            ],
+                            description: "<strong>Stow Your Bags ⭐ RECOMMENDED</strong><br>C/ García de la Vinuesa, 22 (8-min walk). Open 7am-11pm. From €1.49/hour. Book: stowyourbags.com. Closest to cathedral, hourly rates perfect for departure day.<br><br>Other options: Bounce, LuggageHero, or check if your apartment offers storage.",
+                            tip: "💡 Book online now for guaranteed space - Tuesday is busy!",
+                            buttons: [
+                                { text: "Book Storage", url: "https://stowyourbags.com", class: "btn-primary" },
+                                { text: "All Options", url: "https://radicalstorage.com/luggage-storage/seville", class: "btn-secondary" }
+                            ]
+                        },
+                        {
+                            title: "⛵ Guadalquivir River Cruise",
+                            meta: [
+                                { icon: "⏰", text: "12:00 PM" },
+                                { icon: "⏱️", text: "1 hour" },
+                                { text: "€16", class: "price-badge" }
+                            ],
+                            description: "<strong>Cruceros Torre del Oro</strong><br>Departs from Paseo Alcalde Marqués del Contadero (Torre del Oro) - 12-min walk. Boats every hour 11am-7pm. 1-hour cruise with multilingual commentary, bar onboard, panoramic decks. See Seville from the river that made it rich!",
+                            tip: "💡 Buy tickets at dock - no need to book ahead on Tuesday",
+                            buttons: [
+                                { text: "Cruise Info", url: "https://crucerosensevilla.com", class: "btn-primary" },
+                                { text: "Departure Point", url: "https://www.google.com/maps/place/Torre+del+Oro", class: "btn-secondary" }
+                            ]
+                        },
+                        {
+                            title: "🌄 Las Setas de Sevilla",
+                            meta: [
+                                { icon: "⏰", text: "1:30 PM" },
+                                { icon: "📍", text: "10-min walk" },
+                                { text: "€5 walkway", class: "price-badge" }
+                            ],
+                            description: "The 'Mushrooms of Seville' - world's largest wooden structure! Take the elevator up for 360° city views from the 26m high walkway. Perfect timing for golden hour photos. The undulating walkway is an experience itself. Evening light show if you stay late (but you have a flight!).",
+                            tip: "💡 30-45 minutes is plenty - don't miss your early dinner!",
+                            buttons: [
+                                { text: "Buy Tickets", url: "https://setasdesevilla.com", class: "btn-primary" }
+                            ]
+                        },
+                        {
+                            highlight: true,
+                            title: "🍽️ Lunch",
+                            meta: [
+                                { icon: "⏰", text: "1:00 PM" },
+                                { icon: "📍", text: "Leisurely lunch timing" },
+                                { text: "€10-15", class: "price-badge" }
+                            ],
+                            description: "<strong>Taberna Coloniales ⭐ HIGHLY RECOMMENDED</strong><br>C/ Fernández y González, 36 (6-min walk). Open 12:30pm-12:30am continuous. Famous for solomillo al whisky, generous portions. €10-15pp. Perfect timing for a relaxed lunch.<br><br><strong>Azotea Santa Cruz</strong><br>C/ Mateos Gago, 8 (8-min walk). Modern gastrobar, non-stop kitchen all day. Great for lighter fare.",
+                            tip: "💡 Perfect timing for a relaxed lunch - plenty of time before your evening flight",
+                            buttons: [
+                                { text: "Taberna Coloniales", url: "https://www.google.com/maps/place/Taberna+Coloniales+Sevilla", class: "btn-primary" },
+                                { text: "Azotea Location", url: "https://laazoteasevilla.com", class: "btn-secondary" }
+                            ]
+                        },
+                        {
+                            title: "🚖 To Airport",
+                            meta: [
+                                { icon: "⏰", text: "4:30 PM pickup luggage" },
+                                { icon: "⏱️", text: "5:00 PM depart" },
+                                { text: "€22-30 taxi", class: "price-badge" }
+                            ],
+                            description: "Retrieve luggage by 4:30 PM. Airport is 10km away (20-30 min drive). <strong>Taxi:</strong> Fixed fare €22.20 (weekdays), €30.20 (nights/weekends). <strong>Bus EA:</strong> €4, runs every 30 min but with luggage taxi is better. <strong>PideTaxi app</strong> for reliable service.",
+                            tip: "💡 5 PM departure essential for 7 PM flight - Seville airport can have queues!",
+                            buttons: [
+                                { text: "PideTaxi App", url: "https://pidetaxi.es", class: "btn-primary" }
+                            ]
+                        },
+                        {
+                            highlight: true,
+                            title: "✈️ Flight Home",
+                            meta: [
+                                { icon: "⏰", text: "7:00 PM departure" },
+                                { icon: "📍", text: "Check airline" },
+                                { text: "Safe travels!", class: "price-badge" }
+                            ],
+                            description: "Time to say adiós to Seville! Check in online 24 hours before. Seville airport is small but can get busy - arrive 2 hours early for international flights. Duty free has good Spanish wine prices!",
+                            tip: "💡 Buy jamón at duty free - it's vacuum packed for travel!"
+                        }
+                    ]
+                }
+            },
+            
+            secrets: [
+                {
+                    area: "🏛️ Near Colosseum & Forum",
+                    description: "Within 10-15 minutes of the ancient center",
+                    spots: [
+                        {
+                            title: "🌳 Giardinetto del Monte Oppio",
+                            meta: [
+                                { icon: "📍", text: "5 min from Colosseum" },
+                                { icon: "💰", text: "FREE" },
+                                { icon: "⏰", text: "Best at sunset" }
+                            ],
+                            description: "Secret garden with stunning Colosseum views without crowds. Perfect for a peaceful picnic or aperitivo with that iconic backdrop. Enter from Via Labicana. Locals escape tourist chaos here while still seeing the monument.",
+                            tip: "💡 Bring a bottle of wine and enjoy sunset with the Colosseum lit up",
+                            buttons: [
+                                { text: "Directions", url: "https://www.google.com/maps/place/Parco+del+Colle+Oppio/@41.8931,12.4963,17z", class: "btn-primary" }
+                            ]
+                        },
+                        {
+                            title: "⛪ Santo Stefano Rotondo",
+                            meta: [
+                                { icon: "📍", text: "Celio Hill" },
+                                { icon: "💰", text: "FREE" },
+                                { icon: "⏰", text: "9:30 AM-12:30 PM, 3-6 PM" }
+                            ],
+                            description: "Rome's oldest circular church with a shocking secret - walls covered in vivid, gruesome paintings of Christian martyrdoms by Pomarancio. The contrast between serene architecture and brutal art is unforgettable. Almost no tourists.",
+                            tip: "💡 Combine with Santi Quattro Coronati next door for medieval cloister",
+                            buttons: [
+                                { text: "Location", url: "https://www.google.com/maps/place/Santo+Stefano+Rotondo/@41.8848,12.4984,17z", class: "btn-primary" }
+                            ]
+                        },
+                        {
+                            title: "🏺 Case Romane del Celio",
+                            meta: [
+                                { icon: "📍", text: "Under SS. Giovanni e Paolo" },
+                                { icon: "💰", text: "€10" },
+                                { icon: "⏰", text: "10 AM-1 PM, 3-6 PM" }
+                            ],
+                            description: "20 rooms of perfectly preserved Roman houses from 2nd-3rd centuries AD beneath a medieval church. Original frescoes, mosaics, and even an ancient shopping complex. Far fewer visitors than San Clemente but equally fascinating.",
+                            tip: "💡 The frescoed room with marine scenes is spectacular - ancient Roman wallpaper!",
+                            buttons: [
+                                { text: "Book Tickets", url: "https://www.caseromane.it", class: "btn-primary" }
+                            ]
+                        },
+                        {
+                            title: "🗿 Mithraeum at Circus Maximus",
+                            meta: [
+                                { icon: "📍", text: "Via dei Cerchi" },
+                                { icon: "💰", text: "€8" },
+                                { icon: "⏰", text: "Book ahead online" }
+                            ],
+                            description: "Secret underground temple to Persian god Mithras with symbolic frescoes. This mystery religion competed with early Christianity. The underground chamber with its star-studded ceiling feels like entering another world.",
+                            tip: "💡 Saturday late afternoon before your L'Elementare dinner - it's walking distance!",
+                            buttons: [
+                                { text: "Reserve", url: "https://www.coopculture.it", class: "btn-primary" }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    area: "🏰 Near Vatican & Castel Sant'Angelo",
+                    description: "Hidden spots in the Vatican area",
+                    spots: [
+                        {
+                            title: "🔑 The Passetto di Borgo",
+                            meta: [
+                                { icon: "📍", text: "Vatican to Castel Sant'Angelo" },
+                                { icon: "💰", text: "€15 when open" },
+                                { icon: "⏰", text: "Special tours only" }
+                            ],
+                            description: "Secret 800m elevated escape passage used by popes to flee Vatican during attacks. Built in 1277, used during 1527 Sack of Rome. When open for tours, you walk the actual escape route with incredible views. Check for summer evening openings.",
+                            tip: "💡 Even if closed, you can see it from street level - look up along Borgo Pio!",
+                            buttons: [
+                                { text: "Check Availability", url: "https://www.getyourguide.com/rome-l33/passetto-di-borgo", class: "btn-primary" }
+                            ]
+                        },
+                        {
+                            title: "🏛️ Santo Spirito in Sassia",
+                            meta: [
+                                { icon: "📍", text: "Borgo Santo Spirito" },
+                                { icon: "💰", text: "FREE" },
+                                { icon: "⏰", text: "7 AM-12 PM, 3-6 PM" }
+                            ],
+                            description: "Stunning frescoed church steps from Vatican that tourists never enter. The ceiling rivals Sistine Chapel (seriously). Founded by Anglo-Saxons in 8th century, rebuilt by Sixtus IV. The sacristy has mind-blowing Renaissance frescoes.",
+                            tip: "💡 Ring bell for sacristy access - the monks will show you the hidden frescoes",
+                            buttons: [
+                                { text: "Location", url: "https://www.google.com/maps/place/Chiesa+di+Santo+Spirito+in+Sassia/@41.9018,12.4614,17z", class: "btn-primary" }
+                            ]
+                        },
+                        {
+                            title: "🍕 Borgo Pio Pedestrian Street",
+                            meta: [
+                                { icon: "📍", text: "Behind Vatican walls" },
+                                { icon: "💰", text: "€5-15 meals" },
+                                { icon: "⏰", text: "All day" }
+                            ],
+                            description: "Medieval street closed to cars, lined with authentic cheap eats where Vatican workers lunch. Try Il Sorpasso for supplì, Mondo Arancina for Sicilian arancini, or La Soffitta Renovatio for €8 lunch specials. Zero tourists, all locals.",
+                            tip: "💡 Perfect for quick lunch after Vatican Museums - escape the tourist trap restaurants",
+                            buttons: [
+                                { text: "Explore Street", url: "https://www.google.com/maps/place/Borgo+Pio/@41.9034,12.4594,17z", class: "btn-primary" }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    area: "🌉 Trastevere & Gianicolo",
+                    description: "Beyond the tourist track in Rome's Left Bank",
+                    spots: [
+                        {
+                            title: "🌿 Villa Sciarra",
+                            meta: [
+                                { icon: "📍", text: "Via Calandrelli" },
+                                { icon: "💰", text: "FREE" },
+                                { icon: "⏰", text: "Dawn to dusk" }
+                            ],
+                            description: "Secret garden with fountains, peacocks, and zero tourists. Built on ancient Roman villa remains with quirky statues depicting months and zodiac signs. Popular with local dog walkers and readers. Entrance hidden on quiet street.",
+                            tip: "💡 Early morning peacock calls are magical - they roam freely!",
+                            buttons: [
+                                { text: "Find Entrance", url: "https://www.google.com/maps/place/Villa+Sciarra/@41.8831,12.4645,17z", class: "btn-primary" }
+                            ]
+                        },
+                        {
+                            title: "🎨 Galleria Corsini",
+                            meta: [
+                                { icon: "📍", text: "Via della Lungara" },
+                                { icon: "💰", text: "€5" },
+                                { icon: "⏰", text: "Wed-Mon 10 AM-7 PM" }
+                            ],
+                            description: "Palazzo with Caravaggio, Rubens, and Van Dyck that nobody visits. Queen Christina of Sweden died here. The gallery is never crowded, has beautiful frescoed ceilings, and connects to the Botanical Gardens. AC in summer!",
+                            tip: "💡 Combo ticket with Palazzo Barberini for €12 - two incredible galleries",
+                            buttons: [
+                                { text: "Gallery Info", url: "https://www.barberinicorsini.org", class: "btn-primary" }
+                            ]
+                        },
+                        {
+                            title: "🌅 Gianicolo Sunrise Spot",
+                            meta: [
+                                { icon: "📍", text: "Piazzale Garibaldi" },
+                                { icon: "💰", text: "FREE" },
+                                { icon: "⏰", text: "6:30 AM for sunrise" }
+                            ],
+                            description: "Best sunrise in Rome - the entire city turns golden pink. 15-minute walk from Regola via Ponte Sisto. Completely empty at dawn except for photographers. The cannon fires at noon daily (except Sundays) - tradition since 1904!",
+                            tip: "💡 Stop at Bar Gianicolo for cappuccino after - opens 7 AM with terrace views",
+                            buttons: [
+                                { text: "Walking Route", url: "https://www.google.com/maps/dir/Campo+de'+Fiori/Gianicolo+Hill", class: "btn-primary" }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    area: "🏺 Jewish Quarter & Campo Area",
+                    description: "Your neighborhood's best-kept secrets",
+                    spots: [
+                        {
+                            title: "🏛️ Crypta Balbi",
+                            meta: [
+                                { icon: "📍", text: "Via delle Botteghe Oscure" },
+                                { icon: "💰", text: "€10" },
+                                { icon: "⏰", text: "9 AM-7:45 PM" }
+                            ],
+                            description: "Most overlooked of Rome's four national museums. Medieval Rome museum built over ancient theater. The basement has incredible archaeological layers showing Rome's evolution from ancient to medieval. Never crowded, excellent AC.",
+                            tip: "💡 The medieval artifacts collection is unique in Rome - shows daily life, not just art",
+                            buttons: [
+                                { text: "Museum Info", url: "https://www.google.com/maps/place/Crypta+Balbi/@41.8945,12.4798,17z", class: "btn-primary" }
+                            ]
+                        },
+                        {
+                            title: "🐢 Fontana delle Tartarughe",
+                            meta: [
+                                { icon: "📍", text: "Piazza Mattei" },
+                                { icon: "💰", text: "FREE" },
+                                { icon: "⏰", text: "24/7" }
+                            ],
+                            description: "Hidden Renaissance fountain with bronze turtles in tiny medieval square. Legend says it was built overnight by Duke Mattei to impress father-in-law. The turtles were added by Bernini. Surrounded by medieval palaces, totally missed by tourists.",
+                            tip: "💡 Perfect quiet spot for evening aperitivo from nearby Il Goccetto wine bar",
+                            buttons: [
+                                { text: "Find Square", url: "https://www.google.com/maps/place/Fontana+delle+Tartarughe/@41.8935,12.4778,17z", class: "btn-primary" }
+                            ]
+                        },
+                        {
+                            title: "📚 Santa Barbara dei Librai",
+                            meta: [
+                                { icon: "📍", text: "Near Campo de' Fiori" },
+                                { icon: "💰", text: "FREE" },
+                                { icon: "⏰", text: "Irregular hours" }
+                            ],
+                            description: "The bookbinders' guild church with intimate Baroque decorations. Still used by local craftsmen. Beautiful frescoes, peaceful atmosphere, zero tourists. The ceiling shows Santa Barbara protecting the bookbinders. Ring bell if closed.",
+                            tip: "💡 Via dei Giubbonari nearby has actual bookbinding workshops you can peek into",
+                            buttons: [
+                                { text: "Location", url: "https://www.google.com/maps/place/Largo+dei+Librari/@41.8948,12.4738,17z", class: "btn-primary" }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    area: "🎨 Near Trevi & Spanish Steps",
+                    description: "Hidden gems in the tourist epicenter",
+                    spots: [
+                        {
+                            title: "✨ Galleria Sciarra",
+                            meta: [
+                                { icon: "📍", text: "Via Marco Minghetti" },
+                                { icon: "💰", text: "FREE" },
+                                { icon: "⏰", text: "Weekday work hours" }
+                            ],
+                            description: "Art Nouveau courtyard with vaulted glass ceiling and colorful frescoes celebrating female virtues. Hidden between bank buildings 2 minutes from Trevi. Most tourists walk right past. Built 1885 as pedestrian passage, now hosts offices but publicly accessible.",
+                            tip: "💡 Best light for photos around 11 AM-1 PM when sun hits the glass ceiling",
+                            buttons: [
+                                { text: "Find Entrance", url: "https://www.google.com/maps/place/Galleria+Sciarra/@41.9008,12.4807,17z", class: "btn-primary" }
+                            ]
+                        },
+                        {
+                            title: "🏛️ Palazzo Altemps",
+                            meta: [
+                                { icon: "📍", text: "Near Piazza Navona" },
+                                { icon: "💰", text: "€10" },
+                                { icon: "⏰", text: "9 AM-7:45 PM" }
+                            ],
+                            description: "Incredible sculpture museum everyone skips for Vatican Museums. Houses the Ludovisi collection including the throne of Aphrodite. The loggia has best frescoes in Rome. Usually empty, excellent AC, beautiful courtyard for breaks.",
+                            tip: "💡 The audio guide is excellent - included in ticket price",
+                            buttons: [
+                                { text: "Museum Site", url: "https://www.museonazionaleromano.beniculturali.it", class: "btn-primary" }
+                            ]
+                        },
+                        {
+                            title: "🍦 Vicus Caprarius (Trevi Underground)",
+                            meta: [
+                                { icon: "📍", text: "Vicolo del Puttarello 25" },
+                                { icon: "💰", text: "€4" },
+                                { icon: "⏰", text: "11 AM-5 PM" }
+                            ],
+                            description: "Ancient Roman apartment complex and water system under Trevi Fountain area. You're literally under the tourist crowds above! See the virgin aqueduct that still feeds Trevi. Small but fascinating, never busy. The guide explains how Romans lived 2000 years ago.",
+                            tip: "💡 Perfect escape from Trevi crowds - entrance in tiny alley most miss",
+                            buttons: [
+                                { text: "Book Visit", url: "http://www.vicuscaprarius.com", class: "btn-primary" }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    area: "🏛️ Aventine & Testaccio",
+                    description: "Local Rome south of the center",
+                    spots: [
+                        {
+                            title: "🔑 The Aventine Keyhole",
+                            meta: [
+                                { icon: "📍", text: "Piazza dei Cavalieri di Malta" },
+                                { icon: "💰", text: "FREE" },
+                                { icon: "⏰", text: "Best at sunset" }
+                            ],
+                            description: "Peek through the Knights of Malta keyhole for perfectly framed St. Peter's dome view. The garden was designed to create this optical illusion. Three countries in one view: Malta (property), Italy (street), Vatican (dome).",
+                            tip: "💡 Go 30 min before sunset - shorter queue and golden light on the dome",
+                            buttons: [
+                                { text: "Exact Location", url: "https://www.google.com/maps/place/Aventine+Keyhole/@41.8828,12.4788,17z", class: "btn-primary" }
+                            ]
+                        },
+                        {
+                            title: "🏺 Monte Testaccio",
+                            meta: [
+                                { icon: "📍", text: "Via Nicola Zabaglia" },
+                                { icon: "💰", text: "€4 guided tour" },
+                                { icon: "⏰", text: "Tours Sat-Sun only" }
+                            ],
+                            description: "Ancient Rome's landfill made entirely of 53 million broken amphorae (oil jars). Now it's a hill with caves used as wine cellars and clubs. Weekend tours let you climb it and see pottery shards from 2000 years ago. Surreal experience.",
+                            tip: "💡 Flavio al Velavevodetto restaurant is built into the hill's caves",
+                            buttons: [
+                                { text: "Tour Info", url: "https://www.coopculture.it", class: "btn-primary" }
+                            ]
+                        },
+                        {
+                            title: "🎭 MACRO Testaccio",
+                            meta: [
+                                { icon: "📍", text: "Piazza Orazio Giustiniani" },
+                                { icon: "💰", text: "FREE usually" },
+                                { icon: "⏰", text: "Tue-Sun 12-8 PM" }
+                            ],
+                            description: "Contemporary art museum in former slaughterhouse. Industrial architecture contrasts with cutting-edge exhibitions. The pavilions are connected by glass bridges. Almost nobody knows it exists. Great café in the courtyard.",
+                            tip: "💡 Saturday evening aperitivo in the courtyard with DJ sets in summer",
+                            buttons: [
+                                { text: "Current Shows", url: "http://www.mattatoioroma.it", class: "btn-primary" }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    area: "🎭 Quirky & Unusual Rome",
+                    description: "Rome's weirdest and most unique spots",
+                    spots: [
+                        {
+                            title: "🧚 Quartiere Coppedè",
+                            meta: [
+                                { icon: "📍", text: "Via Tagliamento entrance" },
+                                { icon: "💰", text: "FREE" },
+                                { icon: "⏰", text: "Best early morning" }
+                            ],
+                            description: "Fairy-tale neighborhood that looks like Gaudí designed it on acid. Only 31,000 sq meters but feels like another dimension. Art Nouveau palaces with medieval towers, Assyrian decorations, Greek elements. The Fairy House and Frog Fountain are Instagram gold. Built 1913-1926.",
+                            tip: "💡 Used in films for its surreal atmosphere - perfect for unique photos",
+                            buttons: [
+                                { text: "Getting There", url: "https://www.google.com/maps/place/Quartiere+Coppedè/@41.9189,12.5164,17z", class: "btn-primary" }
+                            ]
+                        },
+                        {
+                            title: "💀 Capuchin Crypt",
+                            meta: [
+                                { icon: "📍", text: "Via Veneto 27" },
+                                { icon: "💰", text: "€8.50" },
+                                { icon: "⏰", text: "9 AM-7 PM" }
+                            ],
+                            description: "Six chapels decorated with bones of 3,700 Capuchin monks. Chandeliers of vertebrae, altars of skulls, a skeleton holding a scythe made of bones. The message: 'What you are, we were; what we are, you will be.' Bizarre but unforgettable.",
+                            tip: "💡 No photos allowed in crypt but museum upstairs has Caravaggio painting",
+                            buttons: [
+                                { text: "Book Tickets", url: "https://www.cappucciniviaveneto.it", class: "btn-primary" }
+                            ]
+                        },
+                        {
+                            title: "🏛️ EUR's Fascist Architecture",
+                            meta: [
+                                { icon: "📍", text: "EUR district" },
+                                { icon: "💰", text: "FREE to explore" },
+                                { icon: "⏰", text: "Metro B to EUR" }
+                            ],
+                            description: "Mussolini's unfinished 1942 World's Fair district. The Square Colosseum (Palazzo della Civiltà) is a fascist interpretation of Roman architecture. Feels like a different city - wide boulevards, rationalist buildings, artificial lake. Weird but fascinating.",
+                            tip: "💡 Palazzo della Civiltà hosts free Fendi exhibitions on ground floor",
+                            buttons: [
+                                { text: "EUR Guide", url: "https://www.google.com/maps/place/EUR,+Rome", class: "btn-primary" }
+                            ]
+                        },
+                        {
+                            title: "🎪 Porta Portese Flea Market",
+                            meta: [
+                                { icon: "📍", text: "Via Portuense" },
+                                { icon: "💰", text: "FREE entry" },
+                                { icon: "⏰", text: "Sundays 6 AM-2 PM" }
+                            ],
+                            description: "Rome's biggest flea market - 4km of stalls selling everything imaginable. Vintage clothes, antiques, vinyl, stolen bikes (allegedly), random junk. Pure chaos but incredibly authentic. Watch for pickpockets, bargain hard, arrive early for best stuff.",
+                            tip: "💡 Da Enzo for maritozzo breakfast at market entrance - fuel for shopping!",
+                            buttons: [
+                                { text: "Market Map", url: "https://www.google.com/maps/place/Porta+Portese+Market/@41.8764,12.4731,17z", class: "btn-primary" }
+                            ]
+                        }
+                    ]
+                }
+            ],
+
+            foodCategories: [
+                {
+                    icon: "🍕",
+                    title: "Pizza Al Taglio (By the Slice)",
+                    restaurants: [
+                        { name: "Antico Forno Roscioli", details: "Via dei Chiavari 34 (Regola) • €3-8 • Since 1824, pizza rossa legendary" },
+                        { name: "Bonci Pizzarium", details: "Near Vatican • €20/two • 72-hour dough, creative toppings" },
+                        { name: "Supplizio", details: "Via dei Banchi Vecchi • €3-6 • Gourmet supplì, arrive early" }
+                    ]
+                },
+                {
+                    icon: "🍝",
+                    title: "Traditional Roman",
+                    restaurants: [
+                        { name: "Armando al Pantheon ⭐", details: "Family since 1961 • €25-35 • Michelin Bib Gourmand, book essential" },
+                        { name: "Da Felice (Testaccio)", details: "Since 1936 • €30-40 • Tableside cacio e pepe, Michelin recognition" },
+                        { name: "Flavio al Velavevodetto", details: "Testaccio • €12 gricia • Best value authentic Roman" },
+                        { name: "La Campana", details: "Near Pantheon • €15-35 • Claims world's oldest (1518)" }
+                    ]
+                },
+                {
+                    icon: "🥂",
+                    title: "Aperitivo Spots",
+                    restaurants: [
+                        { name: "Il Sorpasso", details: "Prati • €15 • Generous charcuterie with drinks" },
+                        { name: "Cvlto ⭐", details: "Trastevere • €15 • Former religious shop, password required" },
+                        { name: "Freni e Frizioni", details: "Trastevere • €12 • Converted mechanic shop, huge spread" },
+                        { name: "Bar San Calisto", details: "Trastevere • €5 • Local chess players, zero tourists" }
+                    ]
+                },
+                {
+                    icon: "🍷",
+                    title: "Rooftop Bars",
+                    restaurants: [
+                        { name: "Terrazza Les Étoiles", details: "€20 cocktails • St. Peter's views • Book for sunset" },
+                        { name: "Terrazza Borromini", details: "Piazza Navona • €25-30 aperitivo • Chef-prepared canapés" },
+                        { name: "Jacopa (Budget)", details: "Trastevere • €10-12 cocktails • Rome's cheapest rooftop" }
+                    ]
+                }
+            ],
+
+            bookingCategories: [
+                {
+                    icon: "⚡",
+                    title: "30 Days Before (July 31)",
+                    style: "background: rgba(251, 191, 36, 0.1); border-left-color: var(--warning);",
+                    content: "<strong>Colosseum Underground</strong><br>8:45 AM Rome time EXACTLY on ticketing.colosseo.it<br>€24-30 • Sells out in seconds • Groups of 25 vs thousands<br><em>Note: Regular Colosseum tour already booked ✅</em>",
+                    button: {
+                        text: "Book Colosseum",
+                        onclick: "window.open('https://ticketing.colosseo.it')",
+                        class: "btn-primary",
+                        style: "margin-top: 12px; width: 100%;"
+                    }
+                },
+                {
+                    icon: "📅",
+                    title: "Book ASAP",
+                    restaurants: [
+                        { name: "Vatican Museums", details: "€20+5 • museivaticani.va • Early entry worth it" },
+                        { name: "Domus Aurea VR", details: "€16 • Weekends only • Underground & cool" },
+                        { name: "Armando al Pantheon", details: "Dinner reservation • Family-run since 1961" }
+                    ]
+                },
+                {
+                    icon: "📱",
+                    title: "This Week",
+                    restaurants: [
+                        { name: "TheFork App", details: "30-50% off many restaurants • Book Oste Nostro" },
+                        { name: "Jerry Thomas Password", details: "thejerrythomasproject.it • €5 membership" },
+                        { name: "Rooftop Reservations", details: "Terrazza Les Étoiles for sunset" }
+                    ]
+                },
+                {
+                    icon: "📲",
+                    title: "Apps to Download",
+                    restaurants: [
+                        { name: "Waidy WOW", details: "Find Rome's 2,500 free water fountains" },
+                        { name: "Moovit", details: "Real-time public transport" },
+                        { name: "Google Translate", details: "Download Italian offline" },
+                        { name: "TheFork", details: "Restaurant bookings with discounts" }
+                    ]
+                }
+            ]
+        };
+
+        // TEMPLATE FUNCTIONS
+        function createTabs() {
+            return travelData.tabs.map((tab, index) => `
+                <div class="tab ${index === 0 ? 'active' : ''}" onclick="showSection('${tab.id}')">
+                    <span class="tab-label">${tab.label}</span>
+                    <span class="tab-main">${tab.main}</span>
+                </div>
+            `).join('');
+        }
+
+        function createMetaItem(meta) {
+            const icon = meta.icon || '';
+            const text = meta.text;
+            const className = meta.class || '';
+            
+            if (className === 'price-badge') {
+                return `<span class="price-badge">${text}</span>`;
+            }
+            return `<span class="meta-item">${icon} ${text}</span>`;
+        }
+
+        function createActivityCard(activity, index) {
+            const highlight = activity.highlight ? 'highlight' : '';
+            const meta = activity.meta ? activity.meta.map(createMetaItem).join('') : '';
+            const description = activity.description || '';
+            const extraDescription = activity.extraDescription ? `<p class="activity-description" style="margin-top: 12px;">${activity.extraDescription}</p>` : '';
+            const extraDescription2 = activity.extraDescription2 ? `<p class="activity-description" style="margin-top: 12px;">${activity.extraDescription2}</p>` : '';
+            const tip = activity.tip ? `<div class="tip">${activity.tip}</div>` : '';
+            
+            const restaurants = activity.restaurants ? `
+                <div class="restaurant-grid">
+                    ${activity.restaurants.map(r => `
+                        <div class="restaurant-item">
+                            <div class="restaurant-name">${r.name}</div>
+                            <div class="restaurant-details">${r.details}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            ` : '';
+            
+            const buttons = activity.buttons ? `
+                <div class="action-buttons">
+                    ${activity.buttons.map(btn => 
+                        btn.url ? `<a href="${btn.url}" class="btn ${btn.class}" target="_blank">${btn.text}</a>` :
+                        btn.onclick ? `<button class="btn ${btn.class}" onclick="${btn.onclick}">${btn.text}</button>` :
+                        `<span class="btn ${btn.class}">${btn.text}</span>`
+                    ).join('')}
+                </div>
+            ` : '';
+            
+            // Debug logging
+            console.log('Creating card for:', activity.title);
+            if (activity.title && activity.title.includes('Colosseum')) {
+                console.log('Colosseum activity:', activity);
+                console.log('Buttons data:', activity.buttons);
+                console.log('Buttons HTML:', buttons);
+            }
+
+            return `
+                <div class="timeline-item ${highlight}">
+                    <div class="timeline-dot"></div>
+                    <div class="activity-card">
+                        <div class="activity-header">
+                            <div class="activity-main">
+                                <h3 class="activity-title">${activity.title}</h3>
+                                <div class="activity-meta">${meta}</div>
+                            </div>
+                            <span class="expand-icon">⌄</span>
+                        </div>
+                        <div class="activity-details">
+                            ${description ? `<p class="activity-description">${description}</p>` : ''}
+                            ${extraDescription}
+                            ${extraDescription2}
+                            ${tip}
+                            ${restaurants}
+                        </div>
+                        ${buttons}
+                    </div>
+                </div>
+            `;
+        }
+
+        function createEssentialCard(essential) {
+            const button = essential.button ? `
+                <button class="btn ${essential.button.class}" style="${essential.button.style || ''}" onclick="${essential.button.onclick}">
+                    ${essential.button.text}
+                </button>
+            ` : '';
+            
+            return `
+                <div class="essential-card">
+                    <h3><span class="icon">${essential.icon}</span> ${essential.title}</h3>
+                    <div class="essential-content">
+                        ${essential.content}
+                    </div>
+                    ${essential.tip ? `<div class="tip">${essential.tip}</div>` : ''}
+                    ${button}
+                </div>
+            `;
+        }
+
+        function createFoodCategory(category) {
+            return `
+                <div class="essential-card">
+                    <h3><span class="icon">${category.icon}</span> ${category.title}</h3>
+                    <div class="restaurant-grid">
+                        ${category.restaurants.map(r => `
+                            <div class="restaurant-item">
+                                <div class="restaurant-name">${r.name}</div>
+                                <div class="restaurant-details">${r.details}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function createBookingCategory(category) {
+            const restaurants = category.restaurants ? `
+                <div class="restaurant-grid">
+                    ${category.restaurants.map(r => `
+                        <div class="restaurant-item">
+                            <div class="restaurant-name">${r.name}</div>
+                            <div class="restaurant-details">${r.details}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            ` : '';
+
+            const button = category.button ? `
+                <button class="btn ${category.button.class}" style="${category.button.style || ''}" onclick="${category.button.onclick}">
+                    ${category.button.text}
+                </button>
+            ` : '';
+
+            return `
+                <div class="essential-card" style="${category.style || ''}">
+                    <h3><span class="icon">${category.icon}</span> ${category.title}</h3>
+                    ${category.content ? `<div class="essential-content">${category.content}</div>` : ''}
+                    ${restaurants}
+                    ${button}
+                </div>
+            `;
+        }
+
+        function createSecretsSection() {
+            return `
+                <div class="day-header">
+                    <h2 class="day-title">Rome's Hidden Secrets</h2>
+                    <p class="day-subtitle">Click any area to discover local gems & hidden spots</p>
+                </div>
+                <div class="timeline">
+                    ${travelData.secrets.map((area, index) => createAreaCard(area, index)).join('')}
+                </div>
+            `;
+        }
+        
+        function createAreaCard(area, index) {
+            const spotsCount = area.spots.length;
+            
+            return `
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="activity-card" onclick="toggleCard(this)">
+                        <div class="activity-header">
+                            <div class="activity-main">
+                                <div class="activity-title">${area.area}</div>
+                                <div class="activity-meta">
+                                    <span class="meta-item">📍 ${area.description}</span>
+                                    <span class="meta-item">🔍 ${spotsCount} hidden spots</span>
+                                </div>
+                            </div>
+                            <span class="expand-icon">▼</span>
+                        </div>
+                        <div class="activity-details">
+                            <div class="nested-timeline">
+                                ${area.spots.map((spot, spotIndex) => `
+                                    <div class="nested-timeline-item">
+                                        <div class="nested-timeline-dot"></div>
+                                        ${createActivityCard(spot, spotIndex)}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function createDaySection(dayKey, dayData) {
+            const reminder = dayData.reminder ? `
+                <div class="booking-reminder">
+                    <h4>${dayData.reminder.title}</h4>
+                    <p>${dayData.reminder.text}</p>
+                </div>
+            ` : '';
+
+            return `
+                <section class="section" id="${dayKey}">
+                    <div class="day-header">
+                        <h2 class="day-title">${dayData.title}</h2>
+                        <p class="day-subtitle">${dayData.subtitle}</p>
+                    </div>
+                    ${reminder}
+                    <div class="timeline">
+                        ${dayData.activities.map(createActivityCard).join('')}
+                    </div>
+                </section>
+            `;
+        }
+
+        // GENERATE ALL CONTENT
+        function generateAllContent() {
+            console.log('Generating all content...');
+            const tabsContainer = document.getElementById('tabs-container');
+            const contentContainer = document.getElementById('content-container');
+
+            // Generate tabs
+            tabsContainer.innerHTML = createTabs();
+
+            // Generate content
+            const content = `
+                <!-- Essentials Section -->
+                <!-- <section class="section active" id="essentials">
+                    <div class="quick-stat">
+                        <h3>Your Trip Overview</h3>
+                        <div class="stat-grid">
+                            <div class="stat-item">
+                                <div class="stat-value">${travelData.stats.days}</div>
+                                <div class="stat-label">Days in Seville</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">${travelData.stats.budget}</div>
+                                <div class="stat-label">Est. Total Budget</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">${travelData.stats.location}</div>
+                                <div class="stat-label">Your Base</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">${travelData.stats.temperature}</div>
+                                <div class="stat-label">August Avg</div>
+                            </div>
+                        </div>
+                    </div>
+                    ${travelData.essentials.map(createEssentialCard).join('')}
+                </section> -->
+
+                <!-- Day Sections -->
+                ${Object.keys(travelData.days).map((dayKey, index) => 
+                    createDaySection(dayKey, travelData.days[dayKey]).replace('class="section"', index === 0 ? 'class="section active"' : 'class="section"')
+                ).join('')}
+                
+                <!-- Secrets Section -->
+                <section class="section" id="secrets">
+                    ${createSecretsSection()}
+                </section>
+
+                <!-- Food Section -->
+                <!-- <section class="section" id="food">
+                    <div class="day-header">
+                        <h2 class="day-title">Food Bible</h2>
+                        <p class="day-subtitle">Every restaurant worth knowing</p>
+                    </div>
+                    ${travelData.foodCategories.map(createFoodCategory).join('')}
+                </section> -->
+
+                <!-- Bookings Section -->
+                <!-- <section class="section" id="bookings">
+                    <div class="day-header">
+                        <h2 class="day-title">Booking Checklist</h2>
+                        <p class="day-subtitle">Don't miss these deadlines</p>
+                    </div>
+                    ${travelData.bookingCategories.map(createBookingCategory).join('')}
+                </section> -->
+            `;
+
+            contentContainer.innerHTML = content;
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            generateAllContent();
+            
+            // Handle all clicks with event delegation
+            document.addEventListener('click', function(e) {
+                // Debug logging
+                console.log('Clicked element:', e.target);
+                console.log('Element tagName:', e.target.tagName);
+                console.log('Element className:', e.target.className);
+                console.log('Parent element:', e.target.parentElement);
+                
+                // Check if we clicked on a button or link
+                const button = e.target.closest('.btn');
+                const actionButtons = e.target.closest('.action-buttons');
+                const link = e.target.closest('a');
+                
+                if (button || link) {
+                    console.log('Button/link detected:', button || link);
+                    console.log('URL:', (button || link).href);
+                }
+                
+                // If we clicked a button/link, don't do anything else
+                if (button || actionButtons || link) {
+                    console.log('Interactive element clicked, not toggling card');
+                    // Links will navigate naturally, buttons will execute their onclick
+                    return;
+                }
+                
+                // Check if we clicked on an activity card
+                const card = e.target.closest('.activity-card');
+                if (card) {
+                    console.log('Toggling card');
+                    toggleCard(card);
+                }
+            });
+        });
+
+        // Update Seville time
+        function updateSevilleTime() {
+            const sevilleTime = new Date().toLocaleString("en-US", {
+                timeZone: "Europe/Madrid",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: false
+            });
+            document.getElementById('seville-time').textContent = sevilleTime;
+        }
+        updateSevilleTime();
+        setInterval(updateSevilleTime, 60000);
+
+        // Tab navigation
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.add('active');
+            }
+            
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            if (event && event.target) {
+                event.target.closest('.tab').classList.add('active');
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Card expansion
+        function toggleCard(card) {
+            const isExpanded = card.classList.contains('expanded');
+            
+            if (!isExpanded) {
+                // Expanding
+                card.classList.remove('collapsing');
+                card.classList.add('expanded');
+            } else {
+                // Collapsing - add class for faster animation
+                card.classList.add('collapsing');
+                card.classList.remove('expanded');
+                setTimeout(() => {
+                    card.classList.remove('collapsing');
+                }, 150);
+            }
+            
+            // Haptic feedback on supported devices
+            if ('vibrate' in navigator) {
+                navigator.vibrate(10);
+            }
+        }
+
+        // Get directions
+        function getDirections() {
+            const destinations = {
+                'Campo de\' Fiori': 'Campo+de+Fiori+Rome',
+                'Pantheon': 'Pantheon+Rome',
+                'Jewish Quarter': 'Jewish+Quarter+Rome',
+                'Trastevere': 'Trastevere+Rome',
+                'Colosseum': 'Colosseum+Rome',
+                'Vatican': 'Vatican+City'
+            };
+            
+            const destination = prompt('Where do you want to go?\n\n1. Campo de\' Fiori (3 min)\n2. Pantheon (8 min)\n3. Jewish Quarter (5 min)\n4. Trastevere (10 min)\n5. Colosseum (20 min)\n6. Vatican (25 min)');
+            
+            if (destination && destinations[destination]) {
+                window.open(`https://maps.apple.com/?q=${destinations[destination]}`);
+            }
+        }
+
+        // Touch swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            const activeSection = document.querySelector('.section.active').id;
+            const sections = ['essentials', 'day0', 'day1', 'day2', 'day3', 'food', 'bookings'];
+            const currentIndex = sections.indexOf(activeSection);
+            
+            if (touchEndX < touchStartX - 50 && currentIndex < sections.length - 1) {
+                // Swipe left - next day
+                const nextSection = sections[currentIndex + 1];
+                document.getElementById(nextSection).classList.add('active');
+                document.getElementById(activeSection).classList.remove('active');
+                updateTabs(currentIndex + 1);
+            }
+            
+            if (touchEndX > touchStartX + 50 && currentIndex > 0) {
+                // Swipe right - previous day
+                const prevSection = sections[currentIndex - 1];
+                document.getElementById(prevSection).classList.add('active');
+                document.getElementById(activeSection).classList.remove('active');
+                updateTabs(currentIndex - 1);
+            }
+        }
+        
+        function updateTabs(index) {
+            document.querySelectorAll('.tab').forEach((t, i) => {
+                t.classList.toggle('active', i === index);
+            });
+        }
+
+        // Add "What's Open Now" feature
+        function checkWhatsOpen() {
+            const now = new Date();
+            const sevilleTime = new Date(now.toLocaleString("en-US", {timeZone: "Europe/Madrid"}));
+            const hours = sevilleTime.getHours();
+            
+            let status = '';
+            if (hours >= 8 && hours < 12) {
+                status = 'Museums & monuments open';
+            } else if (hours >= 12 && hours < 15) {
+                status = 'Lunch time - restaurants open';
+            } else if (hours >= 15 && hours < 19) {
+                status = 'Siesta - shops may be closed';
+            } else if (hours >= 19 && hours < 23) {
+                status = 'Aperitivo & dinner time';
+            } else {
+                status = 'Late night - bars open';
+            }
+            
+            // Could add a floating badge
+            if (hours >= 7 && hours < 23) {
+                const badge = document.createElement('div');
+                badge.className = 'floating-badge';
+                badge.textContent = status;
+                document.body.appendChild(badge);
+                setTimeout(() => badge.remove(), 5000);
+            }
+        }
+
+        // Check on load
+        setTimeout(checkWhatsOpen, 2000);
+    </script>
+</body>
+</html>

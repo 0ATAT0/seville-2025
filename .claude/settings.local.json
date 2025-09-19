@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/angus.ANGUS/Documents/Projects/rome-2025/docs/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

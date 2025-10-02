@@ -727,8 +727,8 @@
                 { id: 'day1', label: 'SAT', main: '4' },
                 { id: 'day2', label: 'SUN', main: '5' },
                 { id: 'day3', label: 'MON', main: '6' },
-                { id: 'day4', label: 'TUE', main: '7' },
-                { id: 'secrets', label: '🗝️', main: 'Secrets' }
+                { id: 'day4', label: 'TUE', main: '7' }
+                // { id: 'secrets', label: '🗝️', main: 'Secrets' }
                 // { id: 'food', label: 'ALL', main: 'Food' },
                 // { id: 'bookings', label: 'BOOK', main: 'Now' }
             ],
@@ -829,20 +829,6 @@
                             // <to research> best dishes at Bendala
                         },
                         {
-                            highlight: true,
-                            title: "⛪ Cathedral Night Visit",
-                            meta: [
-                                { icon: "⏰", text: "8:00 PM - Midnight" },
-                                { icon: "📍", text: "3-4 min walk" },
-                                { text: "FREE Tonight!", class: "price-badge" }
-                            ],
-                            description: "Special La Noche en Blanco opening! World's largest Gothic cathedral illuminated at night. Enter via Puerta del Príncipe. See Columbus's tomb, climb Giralda Tower, explore the Treasury. Magical atmosphere without daytime crowds. Last entry 11:00 PM.",
-                            tip: "💡 Go after dinner (10:30 PM) for smaller crowds - most tourists go early",
-                            buttons: [
-                                { text: "Directions", url: "https://www.google.com/maps/dir/C.+Almansa,+7/Catedral+de+Sevilla", class: "btn-primary" }
-                            ]
-                        },
-                        {
                             title: "🍸 Late Night Cocktails",
                             meta: [
                                 { icon: "⏰", text: "11:30 PM+" },
@@ -877,17 +863,17 @@
                             tip: "💡 Order 'café con leche y tostada con tomate' - classic Andalusian breakfast"
                         },
                         {
-                            title: "🚶 Morning Walking Tour Options",
+                            highlight: true,
+                            title: "🚶 Morning Walking Tour ✅",
                             meta: [
-                                { icon: "⏰", text: "10:00-11:00 AM start" },
+                                { icon: "⏰", text: "10:00 AM" },
                                 { icon: "⏱️", text: "2 hours" },
-                                { text: "€15-25", class: "price-badge" }
+                                { text: "Cash donation", class: "price-badge" }
                             ],
-                            description: "<strong>Living Tours - María Luisa Park & Plaza de España</strong><br>Meet: Glorieta San Diego (15-20 min walk). €20-25pp. Covers your requested sites: Alcázar area, María Luisa Park, Plaza de España. Local guides provide insider food tips.<br><br><strong>GetYourGuide Small-Group City Highlights</strong><br>Meet: Plaza de San Francisco fountain (8-10 min walk). €15-20pp. Max 15 people, covers Moorish and Christian architecture, includes Star Wars filming locations.",
-                            tip: "💡 Book ahead or just show up - both usually have space on Saturdays",
+                            description: "CONFIRMED for 10:00 AM! <strong>Meeting point:</strong> 37°23'06.7\"N 5°59'32.0\"W - near Monumento a la Inmaculada Concepción. Take cash for donation at the end of the tour.",
+                            tip: "💡 Bring cash for the donation - cards not accepted",
                             buttons: [
-                                { text: "Living Tours", url: "https://livingtours.com/en/tour/walking-tour-maria-luisa-park", class: "btn-primary" },
-                                { text: "GetYourGuide", url: "https://www.getyourguide.com/seville-l48/seville-small-group-city-highlights-walking-tour-t491716", class: "btn-secondary" }
+                                { text: "Meeting Point Map", url: "https://www.google.com/maps/place/37°23'06.7\"N+5°59'32.0\"W", class: "btn-primary" }
                             ]
                         },
                         {
@@ -931,11 +917,11 @@
                     ]
                 },
                 day2: {
-                    title: "Food Tour & Flamenco",
-                    subtitle: "Sunday, October 5 • Tastes of Seville",
+                    title: "Itálica & Flamenco",
+                    subtitle: "Sunday, October 5 • Roman ruins & authentic flamenco",
                     reminder: {
-                        title: "🍽️ Book Devour Tour NOW",
-                        text: "11 AM tour • Limited Sunday spots • Flamenco 9 PM+"
+                        title: "💃 Flamenco at La Carbonería 8:30 PM",
+                        text: "Arrive by 8pm for seats • Cash only bar!"
                     },
                     activities: [
                         {
@@ -945,22 +931,22 @@
                                 { icon: "📍", text: "Near Las Setas" },
                                 { text: "€2-4", class: "price-badge" }
                             ],
-                            description: "Quick coffee before your food tour. Great options near Las Setas:<br><br><strong>Delatribua</strong> - Specialty coffee roaster with minimalist vibe, excellent single-origin coffees<br><strong>Virgin Coffee</strong> - Popular local chain, reliable quality and pastries<br><strong>La Caña de España</strong> - Traditional option right at the plaza for classic Spanish breakfast<br><br>The meeting point has plenty of options - just don't fill up before the tour!",
-                            tip: "💡 Don't eat too much - save room for the food tour!"
+                            description: "Quick coffee before heading to Itálica:<br><br><strong>Delatribua</strong> - Specialty coffee roaster with minimalist vibe, excellent single-origin coffees<br><strong>Virgin Coffee</strong> - Popular local chain, reliable quality and pastries<br><strong>Confitería La Campana</strong> - Historic pastry shop, famous for breakfast treats<br><br>Grab something light - you'll have time for lunch after the ruins!",
+                            tip: "💡 Keep breakfast light - you'll want lunch after exploring Itálica"
                         },
                         {
                             highlight: true,
-                            title: "🍽️ Devour Food Tour",
+                            title: "🏛️ Itálica Roman Ruins",
                             meta: [
-                                { icon: "⏰", text: "10:30 AM - 1:30 PM" },
-                                { icon: "📍", text: "Meet: Las Setas" },
-                                { text: "€96 per person", class: "price-badge" }
+                                { icon: "⏰", text: "10:00 AM - 1:00 PM" },
+                                { icon: "📍", text: "15 min from Seville" },
+                                { text: "€1.50 EU citizens", class: "price-badge" }
                             ],
-                            description: "<strong>🏆 Tastes, Tapas & Traditions Tour</strong><br>BOOK IMMEDIATELY - Limited Sunday spots! Meet at Plaza de la Encarnación (8-min walk from apartment). #1 on TripAdvisor with good reason. Includes: 8+ tastings, 4 drinks, 7 stops, jamón carving demo. You'll visit century-old pastry shops, family businesses, and get sherry/wine education. Small groups, passionate local guides.",
-                            tip: "💡 Come hungry! This replaces lunch completely",
+                            description: "<strong>Birthplace of Emperors Trajan & Hadrian</strong><br>Game of Thrones filming location! One of the largest amphitheaters in the Roman Empire. <strong>Getting there:</strong> Bus M-270 from Plaza de Armas (€2.21 each way), or book a tour with transport included. EU citizens just €1.50 entry, incredible value for such well-preserved ruins. Allow 2-3 hours to explore the site properly.",
+                            tip: "💡 Perfect for Sunday morning - most sites open, closest day trip option, very impressive",
                             buttons: [
-                                { text: "Book Now", url: "https://devourtours.com/tours/seville-tapas-tour/", class: "btn-primary" },
-                                { text: "Meeting Point", url: "https://www.google.com/maps/place/Plaza+de+la+Encarnación", class: "btn-secondary" }
+                                { text: "Bus to Itálica", url: "https://www.google.com/maps/dir/Plaza+de+Armas+Seville/Italica", class: "btn-primary" },
+                                { text: "Itálica Info", url: "https://www.museosdeandalucia.es/web/conjuntoarqueologicodeitalica", class: "btn-secondary" }
                             ]
                         },
                         {
@@ -970,8 +956,8 @@
                                 { icon: "📍", text: "Your apartment" },
                                 { text: "Rest & digest!" }
                             ],
-                            description: "After that food tour, you'll need a break! Return to apartment for afternoon chill time. Perfect for reviewing photos, planning Monday's day trip, or just enjoying the Spanish siesta tradition. Most shops closed anyway.",
-                            tip: "💡 Book tonight's flamenco show if you haven't already"
+                            description: "After exploring the ruins, you'll need a break! Return to apartment for afternoon chill time. Perfect for reviewing photos, planning Monday's activities, or just enjoying the Spanish siesta tradition. Most shops closed anyway.",
+                            tip: "💡 Remember to bring cash for tonight's flamenco - bar is cash only!"
                         },
                         {
                             title: "🍇 Light Evening Tapas / Dinner In",
@@ -980,22 +966,21 @@
                                 { icon: "📍", text: "Near flamenco venue" },
                                 { text: "€10-15", class: "price-badge" }
                             ],
-                            description: "After the big food tour lunch, keep dinner light. <strong>Option 1:</strong> Grab a tapa or two near your chosen flamenco venue. All three venues have good tapas bars nearby. Perfect for a glass of wine and small bite before the show.<br><br><strong>Option 2 - Dinner In:</strong> Pick up some quality local produce and cook at your apartment! Visit Mercado de la Encarnación (inside Las Setas) or any local supermercado for fresh ingredients. Grab some jamón, manchego cheese, good bread, tomatoes for pan con tomate, and a nice bottle of Rioja. Enjoy on your terrace!",
+                            description: "Light dinner before flamenco. <strong>Option 1:</strong> Grab tapas near La Carbonería. The Santa Cruz area has excellent tapas bars. Perfect for a glass of wine and small bites before the show.<br><br><strong>Option 2 - Dinner In:</strong> Pick up some quality local produce and cook at your apartment! Visit Mercado de la Encarnación (inside Las Setas) or any local supermercado for fresh ingredients. Grab some jamón, manchego cheese, good bread, tomatoes for pan con tomate, and a nice bottle of Rioja. Enjoy on your terrace!",
                             tip: "💡 Cooking in? El Corte Inglés food hall has premium ingredients till 9 PM"
                         },
                         {
                             highlight: true,
-                            title: "💃 Flamenco Shows",
+                            title: "💃 Flamenco at La Carbonería ✅",
                             meta: [
-                                { icon: "⏰", text: "9:00 PM shows" },
-                                { icon: "📍", text: "Santa Cruz" },
-                                { text: "€15-25 or FREE", class: "price-badge" }
+                                { icon: "⏰", text: "8:30 PM show" },
+                                { icon: "📍", text: "4-min walk from apartment" },
+                                { text: "FREE entry", class: "price-badge" }
                             ],
-                            description: "<strong>Casa de la Guitarra ⭐ TOP CHOICE</strong><br>C/ Mesón del Moro 12 (3-min walk). Shows: 7:30pm & 9:00pm (1 hour). €15-20pp. 18th-century house, 30-person max, award-winning guitarist José Luis Postigo, authentic guitar museum. Book: flamencoensevilla.com<br><br><strong>Casa de la Memoria</strong><br>C/ Ximénez de Enciso 28 (5-min walk). Shows: 7:30pm & 9:00pm (1 hour). €18-25pp. 15th-century palace courtyard, no amplification, national award winners. Book: casadelamemoria.es<br><br><strong>La Carbonería (FREE)</strong><br>C/ Céspedes, 21 (4-min walk). Shows: 8:30, 9:30, 10:30pm (30 min each). FREE entry, drinks €5-8 cash only. Former coal factory, local atmosphere. Arrive by 8:00pm for 9:00pm show seats.",
-                            tip: "💡 For 9pm+ preference: Book Casa de la Guitarra 9pm show for intimate experience",
+                            description: "<strong>La Carbonería</strong><br>C/ Céspedes, 21 - Former coal factory with authentic local atmosphere. Shows at 8:30pm, 9:30pm, 10:30pm (30 min each). <strong>FREE entry</strong> - drinks €5-8. <strong>⚠️ CASH ONLY BAR</strong><br><br><strong>Important:</strong> Arrive EARLY to get seats! Get there by 8:00pm for the 8:30pm show - fills up quickly.",
+                            tip: "💡 Bring cash for drinks - no cards accepted at the bar!",
                             buttons: [
-                                { text: "Casa de la Guitarra", url: "https://flamencoensevilla.com", class: "btn-primary" },
-                                { text: "Casa de la Memoria", url: "https://casadelamemoria.es", class: "btn-secondary" }
+                                { text: "Get Directions", url: "https://www.google.com/maps/place/La+Carbonería", class: "btn-primary" }
                             ]
                         },
                         {
@@ -1011,38 +996,71 @@
                     ]
                 },
                 day3: {
-                    title: "Day Trips & Rooftops",
-                    subtitle: "Monday, October 6 • Explore beyond Seville",
+                    title: "Parks, Shopping & Cathedral",
+                    subtitle: "Monday, October 6 • Seville sightseeing day",
                     reminder: {
-                        title: "🍽️ Gusto Dinner 8:30 PM",
-                        text: "Note: Many Jerez bodegas closed Mondays"
+                        title: "⛪ Book Cathedral Tickets + 🍽️ Gusto Dinner 8:30 PM",
+                        text: "Cathedral 4:30-5:30 PM • Book online to skip queues"
                     },
                     activities: [
                         {
-                            title: "🏛️ Half-Day Trip Options",
+                            title: "☕ Morning Coffee",
                             meta: [
-                                { icon: "⏰", text: "Morning - Return by 5 PM" },
-                                { icon: "📍", text: "Various locations" },
-                                { text: "€1.50-45", class: "price-badge" }
+                                { icon: "⏰", text: "9:30 AM" },
+                                { icon: "📍", text: "Near apartment" },
+                                { text: "€2-4", class: "price-badge" }
                             ],
-                            description: "<strong>⚠️ Note: Many Jerez bodegas closed Mondays</strong><br><br><strong>Itálica Roman Ruins ⭐ BEST FOR MONDAY</strong><br>15 min from Seville. €1.50 EU citizens. Birthplace of Emperors Trajan & Hadrian, Game of Thrones location. Tours: Naturanda €35pp incl. transport (naturanda.com), Welcome to Seville €45pp (welcometoseville.com). Or bus M-270 from Plaza de Armas (€2.21).<br><br><strong>Carmona White Village</strong><br>40 min east. Welcome to Seville tour €42pp includes transport/guide/necropolis. 5,000 years history, authentic white village, local wines.<br><br><strong>Olive Oil Mill Tour</strong><br>Naturanda Oil Tourism €35pp, Mon-Fri available, 9am-1pm. Includes transport, mill tour, tastings, farm visit.",
-                            // <!-- <to research> more half-day trip options -->
-                            tip: "💡 Itálica is perfect for Monday - most sites open, closest option, very impressive",
-                            buttons: [
-                                { text: "Itálica Tours", url: "https://naturanda.com", class: "btn-primary" },
-                                { text: "Bus to Itálica", url: "https://www.google.com/maps/dir/Plaza+de+Armas+Seville/Italica", class: "btn-secondary" }
-                            ]
+                            description: "Start your Monday with a relaxed coffee. Great options near you:<br><br><strong>Jester Coffee & Juice</strong> - Fun vibe with excellent coffee and fresh juices<br><strong>Torch Coffee Roasters</strong> - Specialty coffee roaster with single-origin beans<br><strong>Federal Café</strong> - Australian-style cafe with great brunch options<br><br>Take your time - you've got a full day of shopping, parks, and sightseeing ahead!",
+                            tip: "💡 Order a café con leche and plan your day - shopping first, then parks!"
                         },
                         {
-                            title: "🛍️ Afternoon Shopping",
+                            title: "🛍️ Morning Shopping",
                             meta: [
-                                { icon: "⏰", text: "2:00-6:00 PM" },
+                                { icon: "⏰", text: "10:00 AM - 12:00 PM" },
                                 { icon: "📍", text: "City center" },
                                 { text: "Varies" }
                             ],
                             description: "<strong>Fashion Route:</strong><br>1. Calle Sierpes (5-min) - Zara flagship, Mango, Spanish brands<br>2. El Corte Inglés Plaza Magdalena (5-min) - Department store with gourmet food hall<br>3. Calle Tetuán (3-min) - Parallel shopping street<br><br><strong>Artisan Crafts:</strong><br>Triana Ceramics District (15-min): Cerámica Santa Ana, Centro Cerámica Triana<br>El Postigo near Cathedral - Indoor craft market<br><br><strong>Gourmet Foods:</strong><br>Mercado de Triana - Fresh produce, jamón<br>Zaguán 24 (C/ Ximénez de Enciso, 24) - Premium oils, wines<br>El Corte Inglés Gourmet - Spanish products",
                             // <!-- <to research> more artisanal shopping options -->
-                            tip: "💡 Most shops reopen at 5 PM after siesta - perfect timing after your day trip"
+                            tip: "💡 Perfect morning timing - shops open and you'll miss the afternoon siesta closures"
+                        },
+                        {
+                            title: "🍽️ Lunch",
+                            meta: [
+                                { icon: "⏰", text: "12:30 PM" },
+                                { icon: "📍", text: "TBD" },
+                                { text: "€10-20", class: "price-badge" }
+                            ],
+                            description: "<strong>To be decided!</strong><br>Perfect time for lunch after shopping. Lots of great options in the city center - we can decide based on where you end up shopping and what you're in the mood for.",
+                            tip: "💡 Consider somewhere near Parque Maria Luisa for easy afternoon access"
+                        },
+                        {
+                            title: "🌳 Parque Maria Luisa & Plaza de España",
+                            meta: [
+                                { icon: "⏰", text: "2:00-4:00 PM" },
+                                { icon: "📍", text: "20-min walk" },
+                                { text: "FREE", class: "price-badge" }
+                            ],
+                            description: "<strong>Seville's Most Beautiful Park & Plaza</strong><br>Stunning Plaza de España - built for 1929 Expo, featured in Star Wars! Gorgeous ceramic tile alcoves representing all Spanish provinces. Then stroll through Parque Maria Luisa with its fountains, pavilions, and shady paths. Perfect afternoon escape from the heat.",
+                            tip: "💡 Rent a pedal boat on the plaza canal if you're feeling romantic!",
+                            buttons: [
+                                { text: "Directions", url: "https://www.google.com/maps/dir/C.+Almansa,+7/Plaza+de+España", class: "btn-primary" }
+                            ]
+                        },
+                        {
+                            highlight: true,
+                            title: "⛪ Cathedral & Giralda Tower",
+                            meta: [
+                                { icon: "⏰", text: "4:30-5:30 PM" },
+                                { icon: "📍", text: "3-4 min walk" },
+                                { text: "€12-14", class: "price-badge" }
+                            ],
+                            description: "<strong>World's Largest Gothic Cathedral</strong><br>See Columbus's tomb, climb the Giralda Tower for panoramic city views, explore the Treasury. The tower climb is 35 ramps (not stairs!) built for horses. Book online to skip queues. Late afternoon light through the stained glass is magical.",
+                            tip: "💡 Book tickets online in advance - saves queuing time!",
+                            buttons: [
+                                { text: "Book Tickets", url: "https://www.catedraldesevilla.es/en/", class: "btn-primary" },
+                                { text: "Walking Directions", url: "https://www.google.com/maps/dir/Plaza+de+España/Catedral+de+Sevilla", class: "btn-secondary" }
+                            ]
                         },
                         {
                             highlight: true,
@@ -1075,8 +1093,8 @@
                     title: "Departure Day",
                     subtitle: "Tuesday, October 7 • Hasta luego Sevilla",
                     reminder: {
-                        title: "✈️ Flight at 7:00 PM - Leave by 5:00 PM",
-                        text: "Check out 11 AM • Store luggage • Lunch 1 PM"
+                        title: "✈️ Flight at 10:05 PM - Leave by 7:00 PM",
+                        text: "Alcázar 3 PM • Grab bags 5 PM • Dinner 5:30 PM"
                     },
                     activities: [
                         {
@@ -1104,56 +1122,72 @@
                             ]
                         },
                         {
-                            title: "⛵ Guadalquivir River Cruise",
-                            meta: [
-                                { icon: "⏰", text: "12:00 PM" },
-                                { icon: "⏱️", text: "1 hour" },
-                                { text: "€16", class: "price-badge" }
-                            ],
-                            description: "<strong>Cruceros Torre del Oro</strong><br>Departs from Paseo Alcalde Marqués del Contadero (Torre del Oro) - 12-min walk. Boats every hour 11am-7pm. 1-hour cruise with multilingual commentary, bar onboard, panoramic decks. See Seville from the river that made it rich!",
-                            tip: "💡 Buy tickets at dock - no need to book ahead on Tuesday",
-                            buttons: [
-                                { text: "Cruise Info", url: "https://crucerosensevilla.com", class: "btn-primary" },
-                                { text: "Departure Point", url: "https://www.google.com/maps/place/Torre+del+Oro", class: "btn-secondary" }
-                            ]
-                        },
-                        {
                             title: "🌄 Las Setas de Sevilla",
                             meta: [
-                                { icon: "⏰", text: "1:30 PM" },
+                                { icon: "⏰", text: "11:30 AM - 1:00 PM" },
                                 { icon: "📍", text: "10-min walk" },
                                 { text: "€5 walkway", class: "price-badge" }
                             ],
-                            description: "The 'Mushrooms of Seville' - world's largest wooden structure! Take the elevator up for 360° city views from the 26m high walkway. Perfect timing for golden hour photos. The undulating walkway is an experience itself. Evening light show if you stay late (but you have a flight!).",
-                            tip: "💡 30-45 minutes is plenty - don't miss your early dinner!",
+                            description: "The 'Mushrooms of Seville' - world's largest wooden structure! Take the elevator up for 360° city views from the 26m high walkway. Perfect morning timing with great light for photos. The undulating walkway is an experience itself. Explore the Archaeological Museum underneath if you have time.",
+                            tip: "💡 Allow 90 minutes to fully enjoy the walkway and views!",
                             buttons: [
                                 { text: "Buy Tickets", url: "https://setasdesevilla.com", class: "btn-primary" }
                             ]
                         },
                         {
-                            highlight: true,
                             title: "🍽️ Lunch",
                             meta: [
-                                { icon: "⏰", text: "1:00 PM" },
-                                { icon: "📍", text: "Leisurely lunch timing" },
-                                { text: "€10-15", class: "price-badge" }
+                                { icon: "⏰", text: "1:15 PM - 2:45 PM" },
+                                { icon: "📍", text: "TBD" },
+                                { text: "€15-25", class: "price-badge" }
                             ],
-                            description: "<strong>Taberna Coloniales ⭐ HIGHLY RECOMMENDED</strong><br>C/ Fernández y González, 36 (6-min walk). Open 12:30pm-12:30am continuous. Famous for solomillo al whisky, generous portions. €10-15pp. Perfect timing for a relaxed lunch.<br><br><strong>Azotea Santa Cruz</strong><br>C/ Mateos Gago, 8 (8-min walk). Modern gastrobar, non-stop kitchen all day. Great for lighter fare.",
-                            tip: "💡 Perfect timing for a relaxed lunch - plenty of time before your evening flight",
+                            description: "<strong>To be decided!</strong><br>Perfect timing for a proper lunch after Las Setas. Lots of great options nearby. We can decide based on what you're in the mood for - tapas, traditional Spanish, or something lighter before the Alcázar.",
+                            tip: "💡 Book ahead if possible - popular lunch time and you need to be done by 2:45pm for Alcázar"
+                        },
+                        {
+                            highlight: true,
+                            title: "🏰 Real Alcázar ✅",
+                            meta: [
+                                { icon: "⏰", text: "3:00 PM" },
+                                { icon: "⏱️", text: "90 minutes" },
+                                { text: "BOOKED", class: "price-badge" }
+                            ],
+                            description: "CONFIRMED for 3:00 PM! Royal palace still used by Spanish royal family - stunning Mudéjar architecture and lush gardens. Game of Thrones filming location! Allow 90 minutes to explore the palace rooms, patios, and gardens. The Patio de las Doncellas and gardens are absolute highlights.",
+                            tip: "💡 Don't rush - this is one of Seville's crown jewels! But watch the time for bag pickup.",
                             buttons: [
-                                { text: "Taberna Coloniales", url: "https://www.google.com/maps/place/Taberna+Coloniales+Sevilla", class: "btn-primary" },
-                                { text: "Azotea Location", url: "https://laazoteasevilla.com", class: "btn-secondary" }
+                                { text: "Walking Directions", url: "https://www.google.com/maps/dir/C.+Almansa,+7/Real+Alcázar+de+Sevilla", class: "btn-primary" }
                             ]
                         },
                         {
+                            title: "💼 Grab Bags from Storage",
+                            meta: [
+                                { icon: "⏰", text: "5:00 PM" },
+                                { icon: "📍", text: "8-min walk" },
+                                { text: "Pick up time", class: "price-badge" }
+                            ],
+                            description: "Head to Stow Your Bags (C/ García de la Vinuesa, 22) to retrieve your luggage. They're open until 11pm so no rush, but get your bags before dinner so you're ready for the airport after.",
+                            tip: "💡 Quick pickup - then you can enjoy dinner without worrying about bags"
+                        },
+                        {
+                            title: "🍽️ Dinner",
+                            meta: [
+                                { icon: "⏰", text: "5:30 PM" },
+                                { icon: "📍", text: "TBD" },
+                                { text: "€15-25", class: "price-badge" }
+                            ],
+                            description: "<strong>To be decided!</strong><br>Final Seville meal! Pick somewhere you loved or try something new. With an evening flight, you have time for a relaxed dinner. Keep it reasonably near your apartment/storage location so you're ready to head to airport by 7pm.",
+                            tip: "💡 Choose somewhere near the apartment - you'll have luggage with you!"
+                        },
+                        {
+                            highlight: true,
                             title: "🚖 To Airport",
                             meta: [
-                                { icon: "⏰", text: "4:30 PM pickup luggage" },
-                                { icon: "⏱️", text: "5:00 PM depart" },
+                                { icon: "⏰", text: "7:00 PM departure" },
+                                { icon: "⏱️", text: "20-30 min drive" },
                                 { text: "€22-30 taxi", class: "price-badge" }
                             ],
-                            description: "Retrieve luggage by 4:30 PM. Airport is 10km away (20-30 min drive). <strong>Taxi:</strong> Fixed fare €22.20 (weekdays), €30.20 (nights/weekends). <strong>Bus EA:</strong> €4, runs every 30 min but with luggage taxi is better. <strong>PideTaxi app</strong> for reliable service.",
-                            tip: "💡 5 PM departure essential for 7 PM flight - Seville airport can have queues!",
+                            description: "Leave by 7pm for your 10:05pm flight. Airport is 10km away (20-30 min drive). <strong>Taxi:</strong> Fixed fare €22.20 (weekdays), €30.20 (nights/weekends). <strong>Bus EA:</strong> €4, runs every 30 min but with luggage taxi is better. <strong>PideTaxi app</strong> for reliable service.",
+                            tip: "💡 Aim to arrive at airport by 8pm - gives you 2 hours for check-in and security",
                             buttons: [
                                 { text: "PideTaxi App", url: "https://pidetaxi.es", class: "btn-primary" }
                             ]
@@ -1162,11 +1196,11 @@
                             highlight: true,
                             title: "✈️ Flight Home",
                             meta: [
-                                { icon: "⏰", text: "7:00 PM departure" },
-                                { icon: "📍", text: "Check airline" },
+                                { icon: "⏰", text: "10:05 PM departure" },
+                                { icon: "📍", text: "Check airline for gate" },
                                 { text: "Safe travels!", class: "price-badge" }
                             ],
-                            description: "Time to say adiós to Seville! Check in online 24 hours before. Seville airport is small but can get busy - arrive 2 hours early for international flights. Duty free has good Spanish wine prices!",
+                            description: "Time to say adiós to Seville! Flight departs at 22:05 (10:05 PM). Check in online 24 hours before. Seville airport is small but can get busy - aim to arrive by 8pm for a relaxed check-in. Duty free has good Spanish wine prices!",
                             tip: "💡 Buy jamón at duty free - it's vacuum packed for travel!"
                         }
                     ]
@@ -1851,14 +1885,14 @@
                 </section> -->
 
                 <!-- Day Sections -->
-                ${Object.keys(travelData.days).map((dayKey, index) => 
+                ${Object.keys(travelData.days).map((dayKey, index) =>
                     createDaySection(dayKey, travelData.days[dayKey]).replace('class="section"', index === 0 ? 'class="section active"' : 'class="section"')
                 ).join('')}
-                
+
                 <!-- Secrets Section -->
-                <section class="section" id="secrets">
+                <!-- <section class="section" id="secrets">
                     ${createSecretsSection()}
-                </section>
+                </section> -->
 
                 <!-- Food Section -->
                 <!-- <section class="section" id="food">
